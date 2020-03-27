@@ -10,8 +10,8 @@ marty_CRT-Lottes_tweaked.glsl
     - tone down the display curvature
 
 source shader files:
-https://github.com/duganchen/dosbox_shaders/blob/master/crt-easymode.frag
-https://github.com/duganchen/dosbox_shaders/blob/master/crt-easymode.vert
+https://github.com/duganchen/dosbox_shaders/blob/master/crt-lottes.frag
+https://github.com/duganchen/dosbox_shaders/blob/master/crt-lottes.vert
 
 marty's source is available only within the release package of its port:
 https://github.com/MartyShepard/DOSBox-Optionals
