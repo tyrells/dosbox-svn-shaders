@@ -3,7 +3,7 @@
 I have been working on writing shaders for the new version of DOSBox SVN (r4319). There are currently 3 shaders included in this repo:
 
 - pixellate.glsl - a port of the Pixellate shader by Fez and included in [libretro](https://github.com/libretro/glsl-shaders/blob/master/interpolation/shaders/pixellate.glsl).
-- pp.glsl - a pixel-perfect shader with aspect ratio correction, based on [Marat Tanalin's algorithm](https://tanalin.com/en/articles/integer-scaling/).
+- pp.glsl - a pixel-perfect shader with aspect ratio correction, based on [Marat Tanalin's algorithm](https://tanalin.com/en/articles/integer-scaling/). A [Shadertoy implementation](https://www.shadertoy.com/view/3dsyW7) is also available.
 - template.glsl - a shader that doesn't change anything and can be used as a template for other shaders.
 
 In order to get these shaders working, you will need to make the following changes to the `dosbox-SVN.conf` configuration file:
