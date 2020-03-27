@@ -10,8 +10,8 @@ marty_CRT-Lottes_tweaked.glsl
     - tone down the display curvature
 
 source shader files:
-https://github.com/duganchen/dosbox_shaders/blob/master/crt-easymode.frag
-https://github.com/duganchen/dosbox_shaders/blob/master/crt-easymode.vert
+https://github.com/duganchen/dosbox_shaders/blob/master/crt-lottes.frag
+https://github.com/duganchen/dosbox_shaders/blob/master/crt-lottes.vert
 
 marty's source is available only within the release package of its port:
 https://github.com/MartyShepard/DOSBox-Optionals
@@ -49,15 +49,15 @@ void main()
 
 uniform sampler2D rubyTexture;
 
-const float hardScan = -7.0;
-const float hardPix = -3.5;
-const float warpX = 0.0075;
-const float warpY = 0.0075;
+const float hardScan = -7.0;               //tweaked
+const float hardPix = -3.5;                //tweaked
+const float warpX = 0.0075;                //tweaked
+const float warpY = 0.0075;                //tweaked
 const float maskDark = 0.5;
 const float maskLight = 1.5;
 const float scaleInLinearGamma = 1;
 const float shadowMask = 1;
-const float brightBoost = 1.4;
+const float brightBoost = 1.4;             //tweaked
 
 #define Blackmask 1
 
