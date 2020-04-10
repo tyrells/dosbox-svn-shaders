@@ -1,11 +1,12 @@
+#version 120
 /*
 
 dugan_CRT-EasyMode_tweaked.glsl
     dugan's CRT-EasyMode port
     adapted by liPillON for usage with DosBox SVN r4319 and later
-    slightly tweaked the parameters in order to: 
-    - reduce the blurring, 
-    - bump up the brightness a bit, 
+    slightly tweaked the parameters in order to:
+    - reduce the blurring,
+    - bump up the brightness a bit,
     - strengthen the crt mask
 
 source shader files:
@@ -16,20 +17,30 @@ first posted here:
 https://www.vogons.org/viewtopic.php?f=32&t=72697
 
 */
-#version 330 core
 
-varying vec2 v_texCoord;
 uniform vec2 rubyTextureSize;
 uniform vec2 rubyInputSize;
-uniform vec2 rubyOutputSize;
-
-
-
-
 
 #if defined(VERTEX)
 
-attribute vec4 a_position;
+#if __VERSION__ >= 130
+#define COMPAT_VARYING out
+#define COMPAT_ATTRIBUTE in
+#define COMPAT_TEXTURE texture
+#else
+#define COMPAT_VARYING varying
+#define COMPAT_ATTRIBUTE attribute
+#define COMPAT_TEXTURE texture2D
+#endif
+
+#ifdef GL_ES
+#define COMPAT_PRECISION mediump
+#else
+#define COMPAT_PRECISION
+#endif
+
+COMPAT_ATTRIBUTE vec4 a_position;
+COMPAT_VARYING vec2 v_texCoord;
 
 void main()
 {
@@ -37,13 +48,33 @@ void main()
   v_texCoord = vec2(a_position.x+1.0,1.0-a_position.y)/2.0*rubyInputSize/rubyTextureSize;
 }
 
-
-
-
-
 #elif defined(FRAGMENT)
 
+#if __VERSION__ >= 130
+#define COMPAT_VARYING in
+#define COMPAT_TEXTURE texture
+out vec4 FragColor;
+#else
+#define COMPAT_VARYING varying
+#define FragColor gl_FragColor
+#define COMPAT_TEXTURE texture2D
+#endif
+
+#ifdef GL_ES
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+precision highp float;
+#else
+precision mediump float;
+#endif
+#define COMPAT_PRECISION highp
+#else
+#define COMPAT_PRECISION
+#endif
+
+COMPAT_VARYING vec2 v_texCoord;
+
 uniform sampler2D rubyTexture;
+uniform vec2 rubyOutputSize;
 
 #define BRIGHT_BOOST 1.25               //tweaked
 #define DILATION 1.0
@@ -65,7 +96,7 @@ uniform sampler2D rubyTexture;
 
 #define FIX(c) max(abs(c), 1e-5)
 #define PI 3.141592653589
-#define TEX2D(c) dilate(texture(tex, c))
+#define TEX2D(c) dilate(COMPAT_TEXTURE(tex, c))
 
 // Set to 0 to use linear filter and gain speed
 #define ENABLE_LANCZOS 1
@@ -108,8 +139,6 @@ vec3 filter_lanczos(vec4 coeffs, mat4 color_matrix)
     return col.rgb;
 }
 
-out vec4 color;
-
 void main()
 {
     vec2 dx = vec2(1.0 / rubyTextureSize.x, 0.0);
@@ -147,7 +176,7 @@ void main()
     float scan_beam = clamp(bright * SCANLINE_BEAM_WIDTH_MAX, SCANLINE_BEAM_WIDTH_MIN, SCANLINE_BEAM_WIDTH_MAX);
     float scan_weight = 1.0 - pow(cos(v_texCoord.y * 2.0 * PI * rubyTextureSize.y) * 0.5 + 0.5, scan_beam) * SCANLINE_STRENGTH;
 
-    float mask = 1.0 - MASK_STRENGTH;    
+    float mask = 1.0 - MASK_STRENGTH;
     vec2 mod_fac = floor(v_texCoord * rubyOutputSize * rubyTextureSize / (rubyInputSize * vec2(MASK_SIZE, MASK_DOT_HEIGHT * MASK_SIZE)));
     int dot_no = int(mod((mod_fac.x + mod(mod_fac.y, 2.0) * MASK_STAGGER) / MASK_DOT_WIDTH, 3.0));
     vec3 mask_weight;
@@ -164,11 +193,7 @@ void main()
     col *= mask_weight;
     col = pow(col, vec3(1.0 / GAMMA_OUTPUT));
 
-    color = vec4(col * BRIGHT_BOOST, 1.0);
+    FragColor = vec4(col * BRIGHT_BOOST, 1.0);
 }
-
-
-
-
 
 #endif

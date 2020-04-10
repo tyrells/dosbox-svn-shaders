@@ -1,4 +1,4 @@
-#version 330
+#version 120
 
 //    Pixellate Shader
 //    Copyright (c) 2011, 2012 Fes
@@ -18,13 +18,29 @@
 
 #define INTERPOLATE_IN_LINEAR_GAMMA 1.0
 
-#if defined(VERTEX)
-
 uniform vec2 rubyTextureSize;
 uniform vec2 rubyInputSize;
 
-in vec4 a_position;
-out vec2 v_texCoord;
+#if defined(VERTEX)
+
+#if __VERSION__ >= 130
+#define COMPAT_VARYING out
+#define COMPAT_ATTRIBUTE in
+#define COMPAT_TEXTURE texture
+#else
+#define COMPAT_VARYING varying
+#define COMPAT_ATTRIBUTE attribute
+#define COMPAT_TEXTURE texture2D
+#endif
+
+#ifdef GL_ES
+#define COMPAT_PRECISION mediump
+#else
+#define COMPAT_PRECISION
+#endif
+
+COMPAT_ATTRIBUTE vec4 a_position;
+COMPAT_VARYING vec2 v_texCoord;
 
 void main()
 {
@@ -34,18 +50,37 @@ void main()
 
 #elif defined(FRAGMENT)
 
-uniform vec2 rubyTextureSize;
-uniform vec2 rubyInputSize;
+#if __VERSION__ >= 130
+#define COMPAT_VARYING in
+#define COMPAT_TEXTURE texture
+out vec4 FragColor;
+#else
+#define COMPAT_VARYING varying
+#define FragColor gl_FragColor
+#define COMPAT_TEXTURE texture2D
+#endif
+
+#ifdef GL_ES
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+precision highp float;
+#else
+precision mediump float;
+#endif
+#define COMPAT_PRECISION highp
+#else
+#define COMPAT_PRECISION
+#endif
+
+COMPAT_VARYING vec2 v_texCoord;
+
 uniform vec2 rubyOutputSize;
 uniform sampler2D rubyTexture;
-in vec2 v_texCoord;
 
 #define OutputSize rubyOutputSize
 #define TextureSize rubyTextureSize
 #define InputSize rubyInputSize
 #define Texture rubyTexture
 #define TEX0 v_texCoord
-#define FragColor gl_FragColor
 
 // fragment compatibility #defines
 #define Source Texture
@@ -65,11 +100,11 @@ void main()
    float top    = vTexCoord.y + range.y;
    float right  = vTexCoord.x + range.x;
    float bottom = vTexCoord.y - range.y;
-   
-   vec3 topLeftColor     = texture(Source, (floor(vec2(left, top)     / texelSize) + 0.5) * texelSize).rgb;
-   vec3 bottomRightColor = texture(Source, (floor(vec2(right, bottom) / texelSize) + 0.5) * texelSize).rgb;
-   vec3 bottomLeftColor  = texture(Source, (floor(vec2(left, bottom)  / texelSize) + 0.5) * texelSize).rgb;
-   vec3 topRightColor    = texture(Source, (floor(vec2(right, top)    / texelSize) + 0.5) * texelSize).rgb;
+
+   vec3 topLeftColor     = COMPAT_TEXTURE(Source, (floor(vec2(left, top)     / texelSize) + 0.5) * texelSize).rgb;
+   vec3 bottomRightColor = COMPAT_TEXTURE(Source, (floor(vec2(right, bottom) / texelSize) + 0.5) * texelSize).rgb;
+   vec3 bottomLeftColor  = COMPAT_TEXTURE(Source, (floor(vec2(left, bottom)  / texelSize) + 0.5) * texelSize).rgb;
+   vec3 topRightColor    = COMPAT_TEXTURE(Source, (floor(vec2(right, top)    / texelSize) + 0.5) * texelSize).rgb;
 
    if (INTERPOLATE_IN_LINEAR_GAMMA > 0.5){
 	topLeftColor     = pow(topLeftColor, vec3(2.2));
@@ -89,5 +124,5 @@ void main()
    averageColor += ((right - border.x) * (top - border.y)    / totalArea) * topRightColor;
 
    FragColor = (INTERPOLATE_IN_LINEAR_GAMMA > 0.5) ? vec4(pow(averageColor, vec3(1.0 / 2.2)), 1.0) : vec4(averageColor, 1.0);
-} 
+}
 #endif

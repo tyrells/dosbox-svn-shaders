@@ -1,16 +1,34 @@
-#version 330
+#version 120
 
+// Developed by tyrells
 // Based on Marat Tanalin's algorithm: https://tanalin.com/en/articles/integer-scaling/
+
+uniform vec2 rubyInputSize;
 
 #if defined(VERTEX)
 
+#if __VERSION__ >= 130
+#define COMPAT_VARYING out
+#define COMPAT_ATTRIBUTE in
+#define COMPAT_TEXTURE texture
+#else
+#define COMPAT_VARYING varying
+#define COMPAT_ATTRIBUTE attribute
+#define COMPAT_TEXTURE texture2D
+#endif
+
+#ifdef GL_ES
+#define COMPAT_PRECISION mediump
+#else
+#define COMPAT_PRECISION
+#endif
+
 const vec2 targetAspectRatio = vec2(4.0, 3.0);
 
-uniform vec2 rubyInputSize;
 uniform vec2 rubyOutputSize;
 
-in vec4 a_position;
-out vec2 outCoord;
+COMPAT_ATTRIBUTE vec4 a_position;
+COMPAT_VARYING vec2 outCoord;
 
 vec2 calculateScalingRatio(vec2 screenSize, vec2 imageSize, vec2 targetAspectRatio)
 {
@@ -33,10 +51,10 @@ vec2 calculateScalingRatio(vec2 screenSize, vec2 imageSize, vec2 targetAspectRat
 	{
 		scalingRatio.x = maxIntRatio.x;
 		float AUH = maxOutputSize.x / _TargetAspectRatio;
-		
+
 		float yUpperScaleFactor = ceil(AUH / imageSize.y);
 		float yLowerScaleFactor = floor(AUH / imageSize.y);
-		
+
 		float upperAspectRatio = maxOutputSize.x / (yUpperScaleFactor * imageSize.y);
 		float lowerAspectRatio = maxOutputSize.x / (yLowerScaleFactor * imageSize.y);
 
@@ -105,33 +123,53 @@ vec2 calculateScalingRatio(vec2 screenSize, vec2 imageSize, vec2 targetAspectRat
 void main()
 {
     gl_Position = a_position;
-    
+
     //vec2 box_scale = vec2(5.0, 6.0);
     vec2 box_scale = calculateScalingRatio(rubyOutputSize, rubyInputSize, targetAspectRatio);
     vec2 scale = (rubyOutputSize / rubyInputSize) / box_scale;
     vec2 middle = vec2(0.5);
     vec2 TexCoord = vec2(a_position.x + 1.0, 1.0 - a_position.y) / 2.0;
     vec2 diff = (TexCoord - middle) * scale;
-    
+
     outCoord = middle + diff;
 }
 
 #elif defined(FRAGMENT)
 
+#if __VERSION__ >= 130
+#define COMPAT_VARYING in
+#define COMPAT_TEXTURE texture
+out vec4 FragColor;
+#else
+#define COMPAT_VARYING varying
+#define FragColor gl_FragColor
+#define COMPAT_TEXTURE texture2D
+#endif
+
+#ifdef GL_ES
+#ifdef GL_FRAGMENT_PRECISION_HIGH
+precision highp float;
+#else
+precision mediump float;
+#endif
+#define COMPAT_PRECISION highp
+#else
+#define COMPAT_PRECISION
+#endif
+
 uniform sampler2D rubyTexture;
 uniform vec2 rubyTextureSize;
-uniform vec2 rubyInputSize;
 
-in vec2 outCoord;
+COMPAT_VARYING vec2 outCoord;
 
 void main()
 {
-    vec4 outColor = texture(rubyTexture, outCoord * rubyInputSize / rubyTextureSize);
+    vec4 outColor = COMPAT_TEXTURE(rubyTexture, outCoord * rubyInputSize / rubyTextureSize);
     if ( outCoord.x >= 0.0 && outCoord.x <= 1.0 && outCoord.y >= 0.0 && outCoord.y <= 1.0)
-        gl_FragColor = outColor;
+        FragColor = outColor;
     else
        // Can change the background filler colour below
-       gl_FragColor = vec4(0.0, 0.0, 0.0, 1.0);
+       FragColor = vec4(0.0, 0.0, 0.0, 1.0);
 }
 
 #endif
