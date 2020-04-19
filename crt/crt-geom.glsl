@@ -193,7 +193,9 @@ void main()
 	cosangle = cos(vec2(x_tilt, y_tilt)) + vec2(0.001);//cos(vec2(max(abs(x_tilt), 1e-3), max(abs(y_tilt), 1e-3)));
 	stretch = maxscale();
 
-	ilfac = vec2(1.0,clamp(floor(rubyInputSize.y/200.0), 1.0, 2.0));
+	// Disable interlacing as per https://emulation-general.fandom.com/wiki/CRT_Geom
+	// ilfac = vec2(1.0,clamp(floor(rubyInputSize.y/200.0), 1.0, 2.0));
+	ilfac = vec2(1.0,1.0);
 
 // The size of one texel, in texture-coordinates.
 	vec2 sharpTextureSize = vec2(SHARPER * rubyTextureSize.x, rubyTextureSize.y);
