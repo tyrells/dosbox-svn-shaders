@@ -27,8 +27,8 @@ COMPAT_VARYING vec2 v_texCoord;
 
 void main()
 {
-    gl_Position = a_position;
-    v_texCoord = vec2(a_position.x + 1.0, 1.0 - a_position.y) / 2.0 * rubyInputSize / rubyTextureSize;
+	gl_Position = a_position;
+	v_texCoord = vec2(a_position.x + 1.0, 1.0 - a_position.y) / 2.0 * rubyInputSize / rubyTextureSize;
 }
 
 #elif defined(FRAGMENT)
@@ -86,34 +86,34 @@ uniform sampler2D rubyTexture;
 #define BL_TEXTURE blTexture
 vec4 blTexture(in sampler2D sampler, in vec2 uv)
 {
-    // subtract 0.5 here and add it again after the floor to centre the texel
-    vec2 texCoord = uv * rubyTextureSize - vec2(0.5);
-    vec2 s0t0 = floor(texCoord) + vec2(0.5);
-    vec2 s0t1 = s0t0 + vec2(0.0, 1.0);
-    vec2 s1t0 = s0t0 + vec2(1.0, 0.0);
-    vec2 s1t1 = s0t0 + vec2(1.0);
+	// subtract 0.5 here and add it again after the floor to centre the texel
+	vec2 texCoord = uv * rubyTextureSize - vec2(0.5);
+	vec2 s0t0 = floor(texCoord) + vec2(0.5);
+	vec2 s0t1 = s0t0 + vec2(0.0, 1.0);
+	vec2 s1t0 = s0t0 + vec2(1.0, 0.0);
+	vec2 s1t1 = s0t0 + vec2(1.0);
 
-    vec2 invTexSize = 1.0 / rubyTextureSize;
-    vec4 c_s0t0 = COMPAT_TEXTURE(sampler, s0t0 * invTexSize);
-    vec4 c_s0t1 = COMPAT_TEXTURE(sampler, s0t1 * invTexSize);
-    vec4 c_s1t0 = COMPAT_TEXTURE(sampler, s1t0 * invTexSize);
-    vec4 c_s1t1 = COMPAT_TEXTURE(sampler, s1t1 * invTexSize);
+	vec2 invTexSize = 1.0 / rubyTextureSize;
+	vec4 c_s0t0 = COMPAT_TEXTURE(sampler, s0t0 * invTexSize);
+	vec4 c_s0t1 = COMPAT_TEXTURE(sampler, s0t1 * invTexSize);
+	vec4 c_s1t0 = COMPAT_TEXTURE(sampler, s1t0 * invTexSize);
+	vec4 c_s1t1 = COMPAT_TEXTURE(sampler, s1t1 * invTexSize);
 
-    vec2 weight = fract(texCoord);
+	vec2 weight = fract(texCoord);
 
-    vec4 c0 = c_s0t0 + (c_s1t0 - c_s0t0) * weight.x;
-    vec4 c1 = c_s0t1 + (c_s1t1 - c_s0t1) * weight.x;
+	vec4 c0 = c_s0t0 + (c_s1t0 - c_s0t0) * weight.x;
+	vec4 c1 = c_s0t1 + (c_s1t1 - c_s0t1) * weight.x;
 
-    return (c0 + (c1 - c0) * weight.y);
+	return (c0 + (c1 - c0) * weight.y);
 }
 #else
 #define BL_TEXTURE COMPAT_TEXTURE
 #define NN_TEXTURE nnTexture
 vec4 nnTexture(in sampler2D sampler, in vec2 uv)
 {
-    vec2 texCoord = floor(uv * rubyTextureSize) + vec2(0.5);
+	vec2 texCoord = floor(uv * rubyTextureSize) + vec2(0.5);
 	vec2 invTexSize = 1.0 / rubyTextureSize;
-    return COMPAT_TEXTURE(sampler, texCoord * invTexSize);
+	return COMPAT_TEXTURE(sampler, texCoord * invTexSize);
 }
 #endif
 
@@ -121,7 +121,7 @@ COMPAT_VARYING vec2 v_texCoord;
 
 void main()
 {
-    FragColor = COMPAT_TEXTURE(rubyTexture, v_texCoord);
+	FragColor = COMPAT_TEXTURE(rubyTexture, v_texCoord);
 }
 
 #endif
