@@ -122,16 +122,16 @@ vec2 calculateScalingRatio(vec2 screenSize, vec2 imageSize, vec2 targetAspectRat
 
 void main()
 {
-    gl_Position = a_position;
+	gl_Position = a_position;
 
-    //vec2 box_scale = vec2(5.0, 6.0);
-    vec2 box_scale = calculateScalingRatio(rubyOutputSize, rubyInputSize, targetAspectRatio);
-    vec2 scale = (rubyOutputSize / rubyInputSize) / box_scale;
-    vec2 middle = vec2(0.5);
-    vec2 TexCoord = vec2(a_position.x + 1.0, 1.0 - a_position.y) / 2.0;
-    vec2 diff = (TexCoord - middle) * scale;
+	//vec2 box_scale = vec2(5.0, 6.0);
+	vec2 box_scale = calculateScalingRatio(rubyOutputSize, rubyInputSize, targetAspectRatio);
+	vec2 scale = (rubyOutputSize / rubyInputSize) / box_scale;
+	vec2 middle = vec2(0.5);
+	vec2 TexCoord = vec2(a_position.x + 1.0, 1.0 - a_position.y) / 2.0;
+	vec2 diff = (TexCoord - middle) * scale;
 
-    outCoord = middle + diff;
+	outCoord = middle + diff;
 }
 
 #elif defined(FRAGMENT)
@@ -164,12 +164,12 @@ COMPAT_VARYING vec2 outCoord;
 
 void main()
 {
-    vec4 outColor = COMPAT_TEXTURE(rubyTexture, outCoord * rubyInputSize / rubyTextureSize);
-    if ( outCoord.x >= 0.0 && outCoord.x <= 1.0 && outCoord.y >= 0.0 && outCoord.y <= 1.0)
-        FragColor = outColor;
-    else
-       // Can change the background filler colour below
-       FragColor = vec4(0.0, 0.0, 0.0, 1.0);
+	vec4 outColor = COMPAT_TEXTURE(rubyTexture, outCoord * rubyInputSize / rubyTextureSize);
+	if ( outCoord.x >= 0.0 && outCoord.x <= 1.0 && outCoord.y >= 0.0 && outCoord.y <= 1.0)
+		FragColor = outColor;
+	else
+		// Can change the background filler colour below
+		FragColor = vec4(0.0, 0.0, 0.0, 1.0);
 }
 
 #endif

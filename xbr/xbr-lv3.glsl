@@ -73,8 +73,8 @@ uniform COMPAT_PRECISION vec2 rubyInputSize;
 
 void main()
 {
-    gl_Position = a_position;
-    v_texCoord = vec2(a_position.x + 1.0, 1.0 - a_position.y) / 2.0 * rubyInputSize / rubyTextureSize;
+	gl_Position = a_position;
+	v_texCoord = vec2(a_position.x + 1.0, 1.0 - a_position.y) / 2.0 * rubyInputSize / rubyTextureSize;
 	vec2 ps = vec2(1.0) / rubyTextureSize.xy;
 	float dx = ps.x;
 	float dy = ps.y;
@@ -200,35 +200,35 @@ void main()
 	vec3 res1, res2, pix1, pix2;
 	float blend1, blend2;
 
-    vec2 fp = fract(vTexCoord * SourceSize.xy);
+	vec2 fp = fract(vTexCoord * SourceSize.xy);
 
-    vec3 A1 = COMPAT_TEXTURE(rubyTexture, t1.xw).rgb;
-    vec3 B1 = COMPAT_TEXTURE(rubyTexture, t1.yw).rgb;
-    vec3 C1 = COMPAT_TEXTURE(rubyTexture, t1.zw).rgb;
+	vec3 A1 = COMPAT_TEXTURE(rubyTexture, t1.xw).rgb;
+	vec3 B1 = COMPAT_TEXTURE(rubyTexture, t1.yw).rgb;
+	vec3 C1 = COMPAT_TEXTURE(rubyTexture, t1.zw).rgb;
 
-    vec3 A = COMPAT_TEXTURE(rubyTexture, t2.xw).rgb;
-    vec3 B = COMPAT_TEXTURE(rubyTexture, t2.yw).rgb;
-    vec3 C = COMPAT_TEXTURE(rubyTexture, t2.zw).rgb;
+	vec3 A = COMPAT_TEXTURE(rubyTexture, t2.xw).rgb;
+	vec3 B = COMPAT_TEXTURE(rubyTexture, t2.yw).rgb;
+	vec3 C = COMPAT_TEXTURE(rubyTexture, t2.zw).rgb;
 
-    vec3 D = COMPAT_TEXTURE(rubyTexture, t3.xw).rgb;
-    vec3 E = COMPAT_TEXTURE(rubyTexture, t3.yw).rgb;
-    vec3 F = COMPAT_TEXTURE(rubyTexture, t3.zw).rgb;
+	vec3 D = COMPAT_TEXTURE(rubyTexture, t3.xw).rgb;
+	vec3 E = COMPAT_TEXTURE(rubyTexture, t3.yw).rgb;
+	vec3 F = COMPAT_TEXTURE(rubyTexture, t3.zw).rgb;
 
-    vec3 G = COMPAT_TEXTURE(rubyTexture, t4.xw).rgb;
-    vec3 H = COMPAT_TEXTURE(rubyTexture, t4.yw).rgb;
-    vec3 I = COMPAT_TEXTURE(rubyTexture, t4.zw).rgb;
+	vec3 G = COMPAT_TEXTURE(rubyTexture, t4.xw).rgb;
+	vec3 H = COMPAT_TEXTURE(rubyTexture, t4.yw).rgb;
+	vec3 I = COMPAT_TEXTURE(rubyTexture, t4.zw).rgb;
 
-    vec3 G5 = COMPAT_TEXTURE(rubyTexture, t5.xw).rgb;
-    vec3 H5 = COMPAT_TEXTURE(rubyTexture, t5.yw).rgb;
-    vec3 I5 = COMPAT_TEXTURE(rubyTexture, t5.zw).rgb;
+	vec3 G5 = COMPAT_TEXTURE(rubyTexture, t5.xw).rgb;
+	vec3 H5 = COMPAT_TEXTURE(rubyTexture, t5.yw).rgb;
+	vec3 I5 = COMPAT_TEXTURE(rubyTexture, t5.zw).rgb;
 
-    vec3 A0 = COMPAT_TEXTURE(rubyTexture, t6.xy).rgb;
-    vec3 D0 = COMPAT_TEXTURE(rubyTexture, t6.xz).rgb;
-    vec3 G0 = COMPAT_TEXTURE(rubyTexture, t6.xw).rgb;
+	vec3 A0 = COMPAT_TEXTURE(rubyTexture, t6.xy).rgb;
+	vec3 D0 = COMPAT_TEXTURE(rubyTexture, t6.xz).rgb;
+	vec3 G0 = COMPAT_TEXTURE(rubyTexture, t6.xw).rgb;
 
-    vec3 C4 = COMPAT_TEXTURE(rubyTexture, t7.xy).rgb;
-    vec3 F4 = COMPAT_TEXTURE(rubyTexture, t7.xz).rgb;
-    vec3 I4 = COMPAT_TEXTURE(rubyTexture, t7.xw).rgb;
+	vec3 C4 = COMPAT_TEXTURE(rubyTexture, t7.xy).rgb;
+	vec3 F4 = COMPAT_TEXTURE(rubyTexture, t7.xz).rgb;
+	vec3 I4 = COMPAT_TEXTURE(rubyTexture, t7.xw).rgb;
 
 	vec4 b = transpose(mat4x3(B, D, H, F)) * (XBR_Y_WEIGHT * yuv[0]);
 	vec4 c = transpose(mat4x3(C, A, G, I)) * (XBR_Y_WEIGHT * yuv[0]);
@@ -289,13 +289,13 @@ else if(corner_type == 2.0)
 									eq(b,c1)) , eq(d,g0))));} */
 else
 	{interp_restriction_lv1 = and(and(notEqual(e, f), notEqual(e, h)),
-	                             or(or(and(not(eq(f,b)), not(eq(f,c))),
-	                                   and(not(eq(h,d)), not(eq(h,g)))),
-	                                or(and(eq(e,i), or(and(not(eq(f,f4)), not(eq(f,i4))),
-	                                                   and(not(eq(h,h5)), not(eq(h,i5))))),
-	                                   or(eq(e,g), eq(e,c)))));}
+								 or(or(and(not(eq(f,b)), not(eq(f,c))),
+									   and(not(eq(h,d)), not(eq(h,g)))),
+									or(and(eq(e,i), or(and(not(eq(f,f4)), not(eq(f,i4))),
+													   and(not(eq(h,h5)), not(eq(h,i5))))),
+									   or(eq(e,g), eq(e,c)))));}
 
-    interp_restriction_lv2_left = and(notEqual(e, g), notEqual(d, g));
+	interp_restriction_lv2_left = and(notEqual(e, g), notEqual(d, g));
 	interp_restriction_lv2_up   = and(notEqual(e, c), notEqual(b, c));
 	interp_restriction_lv3_left = and(eq2(g,g0), not(eq2(d0,g0)));
 	interp_restriction_lv3_up   = and(eq2(c,c1), not(eq2(b1,c1)));
@@ -318,9 +318,9 @@ else
 	nc15 = and(and(edr, edr_left), and(edr3_left, bvec4(fx15)));
 	nc75 = and(and(edr, edr_up), and(edr3_up, bvec4(fx75)));
 
-    px = lessThanEqual(df(e, f), df(e, h));
+	px = lessThanEqual(df(e, f), df(e, h));
 
-    nc = bvec4(nc75.x || nc15.x || nc30.x || nc60.x || nc45.x, nc75.y || nc15.y || nc30.y || nc60.y || nc45.y, nc75.z || nc15.z || nc30.z || nc60.z || nc45.z, nc75.w || nc15.w || nc30.w || nc60.w || nc45.w);
+	nc = bvec4(nc75.x || nc15.x || nc30.x || nc60.x || nc45.x, nc75.y || nc15.y || nc30.y || nc60.y || nc45.y, nc75.z || nc15.z || nc30.z || nc60.z || nc45.z, nc75.w || nc15.w || nc30.w || nc60.w || nc45.w);
 
 	vec4 final45 = vec4(nc45) * fx45;
 	vec4 final30 = vec4(nc30) * fx30;
@@ -330,20 +330,20 @@ else
 
 	vec4 maximo = max(max(max(final15, final75),max(final30, final60)), final45);
 
-	     if (nc.x) {pix1 = px.x ? F : H; blend1 = maximo.x;}
+		 if (nc.x) {pix1 = px.x ? F : H; blend1 = maximo.x;}
 	else if (nc.y) {pix1 = px.y ? B : F; blend1 = maximo.y;}
 	else if (nc.z) {pix1 = px.z ? D : B; blend1 = maximo.z;}
 	else if (nc.w) {pix1 = px.w ? H : D; blend1 = maximo.w;}
 
-	     if (nc.w) {pix2 = px.w ? H : D; blend2 = maximo.w;}
+		 if (nc.w) {pix2 = px.w ? H : D; blend2 = maximo.w;}
 	else if (nc.z) {pix2 = px.z ? D : B; blend2 = maximo.z;}
 	else if (nc.y) {pix2 = px.y ? B : F; blend2 = maximo.y;}
 	else if (nc.x) {pix2 = px.x ? F : H; blend2 = maximo.x;}
 
-    res1 = mix(E, pix1, blend1);
-    res2 = mix(E, pix2, blend2);
-    vec3 res = mix(res1, res2, step(c_df(E, res1), c_df(E, res2)));
+	res1 = mix(E, pix1, blend1);
+	res2 = mix(E, pix2, blend2);
+	vec3 res = mix(res1, res2, step(c_df(E, res1), c_df(E, res2)));
 
-    FragColor = vec4(res, 1.0);
+	FragColor = vec4(res, 1.0);
 }
 #endif

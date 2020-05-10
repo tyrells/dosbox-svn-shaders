@@ -2,9 +2,9 @@
 /*
 
 dugan_CRT-EasyMode_tweaked.glsl
-    dugan's ScanLine shader
-    adapted by liPillON for usage with DosBox SVN r4319 and later
-    no tweaks
+		dugan's ScanLine shader
+		adapted by liPillON for usage with DosBox SVN r4319 and later
+		no tweaks
 
 source shader files:
 https://github.com/duganchen/dosbox_shaders/blob/master/scanline.frag
@@ -44,10 +44,10 @@ COMPAT_VARYING vec2 omega;
 
 void main()
 {
-  gl_Position = a_position;
-  v_texCoord = vec2(a_position.x+1.0,1.0-a_position.y)/2.0*rubyInputSize/rubyTextureSize;
+	gl_Position = a_position;
+	v_texCoord = vec2(a_position.x+1.0,1.0-a_position.y)/2.0*rubyInputSize/rubyTextureSize;
 
-  omega = vec2(3.1415 * rubyOutputSize.x * rubyTextureSize.x / rubyInputSize.x, 2.0 * 3.1415 * rubyTextureSize.y);
+	omega = vec2(3.1415 * rubyOutputSize.x * rubyTextureSize.x / rubyInputSize.x, 2.0 * 3.1415 * rubyTextureSize.y);
 }
 
 #elif defined(FRAGMENT)
@@ -84,10 +84,10 @@ COMPAT_VARYING vec2 omega;
 
 void main()
 {
-  vec2 sine_comp = vec2(SCANLINE_SINE_COMP_A, SCANLINE_SINE_COMP_B);
-  vec3 res = COMPAT_TEXTURE(rubyTexture, v_texCoord).xyz;
-  vec3 scanline = res * (SCANLINE_BASE_BRIGHTNESS + dot(sine_comp * sin(v_texCoord * omega), vec2(1.0, 1.0)));
-  FragColor = vec4(scanline.x, scanline.y, scanline.z, 1.0);
+	vec2 sine_comp = vec2(SCANLINE_SINE_COMP_A, SCANLINE_SINE_COMP_B);
+	vec3 res = COMPAT_TEXTURE(rubyTexture, v_texCoord).xyz;
+	vec3 scanline = res * (SCANLINE_BASE_BRIGHTNESS + dot(sine_comp * sin(v_texCoord * omega), vec2(1.0, 1.0)));
+	FragColor = vec4(scanline.x, scanline.y, scanline.z, 1.0);
 }
 
 #endif

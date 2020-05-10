@@ -1,23 +1,23 @@
 #version 120
 /*
-    CRT-interlaced
+	CRT-interlaced
 
-    Copyright (C) 2010-2012 cgwg, Themaister and DOLLS
+	Copyright (C) 2010-2012 cgwg, Themaister and DOLLS
 
-    This program is free software; you can redistribute it and/or modify it
-    under the terms of the GNU General Public License as published by the Free
-    Software Foundation; either version 2 of the License, or (at your option)
-    any later version.
+	This program is free software; you can redistribute it and/or modify it
+	under the terms of the GNU General Public License as published by the Free
+	Software Foundation; either version 2 of the License, or (at your option)
+	any later version.
 
-    (cgwg gave their consent to have the original version of this shader
-    distributed under the GPL in this message:
+	(cgwg gave their consent to have the original version of this shader
+	distributed under the GPL in this message:
 
-        http://board.byuu.org/viewtopic.php?p=26075#p26075
+		http://board.byuu.org/viewtopic.php?p=26075#p26075
 
-        "Feel free to distribute my shaders under the GPL. After all, the
-        barrel distortion code was taken from the Curvature shader, which is
-        under the GPL."
-    )
+		"Feel free to distribute my shaders under the GPL. After all, the
+		barrel distortion code was taken from the Curvature shader, which is
+		under the GPL."
+	)
 	This shader variant is pre-configured with screen curvature
 */
 
@@ -113,15 +113,15 @@ uniform COMPAT_PRECISION float interlace_detect;
 #define FIX(c) max(abs(c), 1e-5);
 
 float intersect(vec2 xy)
-        {
+		{
 	float A = dot(xy,xy)+d*d;
 	float B = 2.0*(R*(dot(xy,sinangle)-d*cosangle.x*cosangle.y)-d*d);
 	float C = d*d + 2.0*R*d*cosangle.x*cosangle.y;
 	return (-B-sqrt(B*B-4.0*A*C))/(2.0*A);
-        }
+		}
 
 vec2 bkwtrans(vec2 xy)
-        {
+		{
 	float c = intersect(xy);
 	vec2 point = vec2(c)*xy;
 	point -= vec2(-R)*sinangle;
@@ -135,25 +135,25 @@ vec2 bkwtrans(vec2 xy)
 	vec2 uv = (point-a*sinangle)/cosangle;
 	float r = R*acos(a);
 	return uv*r/sin(r/R);
-        }
+		}
 
 vec2 fwtrans(vec2 uv)
-        {
+		{
 	float r = FIX(sqrt(dot(uv,uv)));
 	uv *= sin(r/R)/r;
 	float x = 1.0-cos(r/R);
 	float D = d/R + x*cosangle.x*cosangle.y+dot(uv,sinangle);
 	return d*(uv*cosangle-x*sinangle)/D;
-        }
+		}
 
 vec3 maxscale()
-        {
+		{
 	vec2 c = bkwtrans(-R * sinangle / (1.0 + R/d*cosangle.x*cosangle.y));
 	vec2 a = vec2(0.5,0.5)*aspect;
 	vec2 lo = vec2(fwtrans(vec2(-a.x,c.y)).x, fwtrans(vec2(c.x,-a.y)).y)/aspect;
 	vec2 hi = vec2(fwtrans(vec2(+a.x,c.y)).x, fwtrans(vec2(c.x,+a.y)).y)/aspect;
 	return vec3((hi+lo)*aspect*0.5,max(hi.x-lo.x,hi.y-lo.y));
-        }
+		}
 
 void main()
 {
@@ -184,8 +184,8 @@ void main()
 
 // END of parameters
 
-    gl_Position = a_position;
-    v_texCoord = vec2(a_position.x + 1.0, 1.0 - a_position.y) / 2.0 * rubyInputSize / rubyTextureSize;
+	gl_Position = a_position;
+	v_texCoord = vec2(a_position.x + 1.0, 1.0 - a_position.y) / 2.0 * rubyInputSize / rubyTextureSize;
 
 // Precalculate a bunch of useful values we'll need in the fragment
 // shader.
@@ -230,7 +230,7 @@ precision mediump float;
 #endif
 
 struct output_dummy {
-    vec4 _color;
+	vec4 _color;
 };
 
 COMPAT_VARYING vec2 v_texCoord;
@@ -243,25 +243,25 @@ uniform sampler2D rubyTexture;
 
 // Comment the next line to disable interpolation in linear gamma (and
 // gain speed).
-	#define LINEAR_PROCESSING
+#define LINEAR_PROCESSING
 
 // Enable screen curvature.
-//        #define CURVATURE
+//#define CURVATURE
 
 // Enable 3x oversampling of the beam profile
-        #define OVERSAMPLE
+#define OVERSAMPLE
 
 // Use the older, purely gaussian beam profile
-        //#define USEGAUSSIAN
+//#define USEGAUSSIAN
 
 // Macros.
 #define FIX(c) max(abs(c), 1e-5);
 #define PI 3.141592653589
 
 #ifdef LINEAR_PROCESSING
-#       define TEX2D(c) pow(COMPAT_TEXTURE(rubyTexture, (c)), vec4(CRTgamma))
+	#define TEX2D(c) pow(COMPAT_TEXTURE(rubyTexture, (c)), vec4(CRTgamma))
 #else
-#       define TEX2D(c) COMPAT_TEXTURE(rubyTexture, (c))
+	#define TEX2D(c) COMPAT_TEXTURE(rubyTexture, (c))
 #endif
 
 COMPAT_VARYING vec2 one;
@@ -293,15 +293,15 @@ uniform COMPAT_PRECISION float interlace_detect;
 #endif
 
 float intersect(vec2 xy)
-        {
+{
 	float A = dot(xy,xy)+d*d;
 	float B = 2.0*(R*(dot(xy,sinangle)-d*cosangle.x*cosangle.y)-d*d);
 	float C = d*d + 2.0*R*d*cosangle.x*cosangle.y;
 	return (-B-sqrt(B*B-4.0*A*C))/(2.0*A);
-        }
+}
 
 vec2 bkwtrans(vec2 xy)
-        {
+{
 	float c = intersect(xy);
 	vec2 point = vec2(c)*xy;
 	point -= vec2(-R)*sinangle;
@@ -315,17 +315,17 @@ vec2 bkwtrans(vec2 xy)
 	vec2 uv = (point-a*sinangle)/cosangle;
 	float r = FIX(R*acos(a));
 	return uv*r/sin(r/R);
-        }
+}
 
 vec2 transform(vec2 coord)
-        {
+{
 	coord *= rubyTextureSize / rubyInputSize;
 	coord = (coord-vec2(0.5))*aspect*stretch.z+stretch.xy;
 	return (bkwtrans(coord)/vec2(overscan_x / 100.0, overscan_y / 100.0)/aspect+vec2(0.5)) * rubyInputSize / rubyTextureSize;
-        }
+}
 
 float corner(vec2 coord)
-        {
+{
 	coord *= rubyTextureSize / rubyInputSize;
 	coord = (coord - vec2(0.5)) * vec2(overscan_x / 100.0, overscan_y / 100.0) + vec2(0.5);
 	coord = min(coord, vec2(1.0)-coord) * aspect;
@@ -333,7 +333,7 @@ float corner(vec2 coord)
 	coord = (cdist - min(coord,cdist));
 	float dist = sqrt(dot(coord,coord));
 	return clamp((cdist.x-dist)*cornersmooth,0.0, 1.0);
-        }
+}
 
 // Calculate the influence of a scanline on the current pixel.
 //
@@ -342,7 +342,7 @@ float corner(vec2 coord)
 // 'color' is the colour of the scanline at the horizontal location of
 // the current pixel.
 vec4 scanlineWeights(float distance, vec4 color)
-        {
+{
 	// "wid" controls the width of the scanline beam, for each RGB
 	// channel The "weights" lines basically specify the formula
 	// that gives you the profile of the beam, i.e. the intensity as
@@ -362,7 +362,7 @@ vec4 scanlineWeights(float distance, vec4 color)
 	vec4 weights = vec4(distance / scanline_weight);
 	return (lum + 1.4) * exp(-pow(weights * inversesqrt(0.5 * wid), wid)) / (0.6 + 0.2 * wid);
 #endif
-        }
+}
 
 void main()
 {
@@ -422,17 +422,17 @@ void main()
 // scanlines at the horizontal location of the current pixel,
 // using the Lanczos coefficients above.
 	vec4 col  = clamp(mat4(
-                        TEX2D(xy + vec2(-one.x, 0.0)),
-                        TEX2D(xy),
-                        TEX2D(xy + vec2(one.x, 0.0)),
-                        TEX2D(xy + vec2(2.0 * one.x, 0.0))) * coeffs,
-                        0.0, 1.0);
-        vec4 col2 = clamp(mat4(
-                        TEX2D(xy + vec2(-one.x, one.y)),
-                        TEX2D(xy + vec2(0.0, one.y)),
-                        TEX2D(xy + one),
-                        TEX2D(xy + vec2(2.0 * one.x, one.y))) * coeffs,
-                        0.0, 1.0);
+						TEX2D(xy + vec2(-one.x, 0.0)),
+						TEX2D(xy),
+						TEX2D(xy + vec2(one.x, 0.0)),
+						TEX2D(xy + vec2(2.0 * one.x, 0.0))) * coeffs,
+						0.0, 1.0);
+	vec4 col2 = clamp(mat4(
+						TEX2D(xy + vec2(-one.x, one.y)),
+						TEX2D(xy + vec2(0.0, one.y)),
+						TEX2D(xy + one),
+						TEX2D(xy + vec2(2.0 * one.x, one.y))) * coeffs,
+						0.0, 1.0);
 
 #ifndef LINEAR_PROCESSING
 	col  = pow(col , vec4(CRTgamma));
@@ -460,7 +460,7 @@ vec3 dotMaskWeights = mix(
 	vec3(1.0, 1.0 - DOTMASK, 1.0),
 	vec3(1.0 - DOTMASK, 1.0, 1.0 - DOTMASK),
 	floor(mod(mod_factor, 2.0))
-        );
+		);
 
 	mul_res *= dotMaskWeights;
 
@@ -468,8 +468,8 @@ vec3 dotMaskWeights = mix(
 	mul_res = pow(mul_res, vec3(1.0 / monitorgamma));
 
 // Color the texel.
-    output_dummy _OUT;
-    FragColor = vec4(mul_res, 1.0);
-    return;
+	output_dummy _OUT;
+	FragColor = vec4(mul_res, 1.0);
+	return;
 }
 #endif

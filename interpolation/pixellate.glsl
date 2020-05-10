@@ -44,8 +44,8 @@ COMPAT_VARYING vec2 v_texCoord;
 
 void main()
 {
-    gl_Position = a_position;
-    v_texCoord = vec2(a_position.x + 1.0, 1.0 - a_position.y) / 2.0 * rubyInputSize / rubyTextureSize;
+	gl_Position = a_position;
+	v_texCoord = vec2(a_position.x + 1.0, 1.0 - a_position.y) / 2.0 * rubyInputSize / rubyTextureSize;
 }
 
 #elif defined(FRAGMENT)
@@ -91,38 +91,38 @@ uniform sampler2D rubyTexture;
 
 void main()
 {
-   vec2 texelSize = SourceSize.zw;
+	vec2 texelSize = SourceSize.zw;
 
-   vec2 range = vec2(abs(InputSize.x / (outsize.x * SourceSize.x)), abs(InputSize.y / (outsize.y * SourceSize.y)));
-   range = range / 2.0 * 0.999;
+	vec2 range = vec2(abs(InputSize.x / (outsize.x * SourceSize.x)), abs(InputSize.y / (outsize.y * SourceSize.y)));
+	range = range / 2.0 * 0.999;
 
-   float left   = vTexCoord.x - range.x;
-   float top    = vTexCoord.y + range.y;
-   float right  = vTexCoord.x + range.x;
-   float bottom = vTexCoord.y - range.y;
+	float left   = vTexCoord.x - range.x;
+	float top    = vTexCoord.y + range.y;
+	float right  = vTexCoord.x + range.x;
+	float bottom = vTexCoord.y - range.y;
 
-   vec3 topLeftColor     = COMPAT_TEXTURE(Source, (floor(vec2(left, top)     / texelSize) + 0.5) * texelSize).rgb;
-   vec3 bottomRightColor = COMPAT_TEXTURE(Source, (floor(vec2(right, bottom) / texelSize) + 0.5) * texelSize).rgb;
-   vec3 bottomLeftColor  = COMPAT_TEXTURE(Source, (floor(vec2(left, bottom)  / texelSize) + 0.5) * texelSize).rgb;
-   vec3 topRightColor    = COMPAT_TEXTURE(Source, (floor(vec2(right, top)    / texelSize) + 0.5) * texelSize).rgb;
+	vec3 topLeftColor     = COMPAT_TEXTURE(Source, (floor(vec2(left, top)     / texelSize) + 0.5) * texelSize).rgb;
+	vec3 bottomRightColor = COMPAT_TEXTURE(Source, (floor(vec2(right, bottom) / texelSize) + 0.5) * texelSize).rgb;
+	vec3 bottomLeftColor  = COMPAT_TEXTURE(Source, (floor(vec2(left, bottom)  / texelSize) + 0.5) * texelSize).rgb;
+	vec3 topRightColor    = COMPAT_TEXTURE(Source, (floor(vec2(right, top)    / texelSize) + 0.5) * texelSize).rgb;
 
-   if (INTERPOLATE_IN_LINEAR_GAMMA > 0.5){
+	if (INTERPOLATE_IN_LINEAR_GAMMA > 0.5){
 	topLeftColor     = pow(topLeftColor, vec3(2.2));
 	bottomRightColor = pow(bottomRightColor, vec3(2.2));
 	bottomLeftColor  = pow(bottomLeftColor, vec3(2.2));
 	topRightColor    = pow(topRightColor, vec3(2.2));
-   }
+	}
 
-   vec2 border = clamp(floor((vTexCoord / texelSize) + vec2(0.5)) * texelSize, vec2(left, bottom), vec2(right, top));
+	vec2 border = clamp(floor((vTexCoord / texelSize) + vec2(0.5)) * texelSize, vec2(left, bottom), vec2(right, top));
 
-   float totalArea = 4.0 * range.x * range.y;
+	float totalArea = 4.0 * range.x * range.y;
 
-   vec3 averageColor;
-   averageColor  = ((border.x - left)  * (top - border.y)    / totalArea) * topLeftColor;
-   averageColor += ((right - border.x) * (border.y - bottom) / totalArea) * bottomRightColor;
-   averageColor += ((border.x - left)  * (border.y - bottom) / totalArea) * bottomLeftColor;
-   averageColor += ((right - border.x) * (top - border.y)    / totalArea) * topRightColor;
+	vec3 averageColor;
+	averageColor  = ((border.x - left)  * (top - border.y)    / totalArea) * topLeftColor;
+	averageColor += ((right - border.x) * (border.y - bottom) / totalArea) * bottomRightColor;
+	averageColor += ((border.x - left)  * (border.y - bottom) / totalArea) * bottomLeftColor;
+	averageColor += ((right - border.x) * (top - border.y)    / totalArea) * topRightColor;
 
-   FragColor = (INTERPOLATE_IN_LINEAR_GAMMA > 0.5) ? vec4(pow(averageColor, vec3(1.0 / 2.2)), 1.0) : vec4(averageColor, 1.0);
+	FragColor = (INTERPOLATE_IN_LINEAR_GAMMA > 0.5) ? vec4(pow(averageColor, vec3(1.0 / 2.2)), 1.0) : vec4(averageColor, 1.0);
 }
 #endif

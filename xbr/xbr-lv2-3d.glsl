@@ -91,8 +91,8 @@ uniform COMPAT_PRECISION float XBR_SCALE;
 
 void main()
 {
-    gl_Position = a_position;
-    v_texCoord.xy = vec2(a_position.x + 1.0, 1.0 - a_position.y) / 2.0 * rubyInputSize / rubyTextureSize;
+	gl_Position = a_position;
+	v_texCoord.xy = vec2(a_position.x + 1.0, 1.0 - a_position.y) / 2.0 * rubyInputSize / rubyTextureSize;
 	vec2 ps = XBR_RES/SourceSize.xy;
 	float dx = ps.x;
 	float dy = ps.y;
@@ -160,7 +160,7 @@ uniform COMPAT_PRECISION float XBR_SCALE;
 //#define CORNER_D
 
 #ifndef CORNER_A
-  #define SMOOTH_TIPS
+	#define SMOOTH_TIPS
 #endif
 
 #define lv2_cf XBR_LV2_COEFFICIENT
@@ -189,13 +189,13 @@ const vec3 Y = vec3(0.2126, 0.7152, 0.0722);
 // Difference between vector components.
 vec4 df(vec4 A, vec4 B)
 {
-    return vec4(abs(A-B));
+	return vec4(abs(A-B));
 }
 
 // Determine if two vector components are equal based on a threshold.
 bvec4 eq(vec4 A, vec4 B)
 {
-    return (lessThan(df(A, B), vec4(XBR_EQ_THRESHOLD)));
+	return (lessThan(df(A, B), vec4(XBR_EQ_THRESHOLD)));
 }
 
 vec4 weighted_distance(vec4 a, vec4 b, vec4 c, vec4 d, vec4 e, vec4 f, vec4 g, vec4 h)
@@ -205,8 +205,8 @@ vec4 weighted_distance(vec4 a, vec4 b, vec4 c, vec4 d, vec4 e, vec4 f, vec4 g, v
 
 float c_df(vec3 c1, vec3 c2)
 {
-      vec3 df = abs(c1 - c2);
-      return df.r + df.g + df.b;
+	vec3 df = abs(c1 - c2);
+	return df.r + df.g + df.b;
 }
 
 void main()
