@@ -50,4 +50,9 @@ In addition to the shaders ported from RetroArch, the following new shaders are 
 
 I have tested the pixel-perfect shader code against [Marat Tanalin's reference implementation](https://tanalin.com/en/projects/integer-scaling/) and the original DOSBox [Pixel perfect patch](http://www.vogons.org/viewtopic.php?f=32&t=49160) originally included in [DOSBox ECE](https://dosboxece.yesterplay.net/en/). This implementation provides the identical level of scaling for the majority of the input/output resolutions I tested. Testing was conducted using DOSBox SVN r4334, which does not appear to be using the full resolution of the monitor in full screen mode, and therefore some results will be different to the pixel perfect scaling seen in DOSBox ECE. This is probably something that needs to be changed in the DOSBox OpenGL rendering code, but is not something I have looked at yet.
 
-Thanks to [Delfino Furioso](https://www.vogons.org/viewtopic.php?f=32&t=72697) for porting/tweaking many of the CRT shaders.
+Thanks to [Delfino Furioso](https://www.vogons.org/viewtopic.php?f=32&t=72697) for porting/tweaking many of the CRT shaders.  He has the following recommendations:
+- fakelottes for game resolutions up to 640x480
+- easymode for game resolutions over 640x480
+- geom as a 'jack of all trades' for all resolutions
+
+The tweaked versions mainly reduce the curvature effect and brighten the image.
