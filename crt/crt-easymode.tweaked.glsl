@@ -30,23 +30,23 @@
 */
 
 // Parameter lines go here:
-#pragma parameter SHARPNESS_H "Sharpness Horizontal" 0.5 0.0 1.0 0.05
-#pragma parameter SHARPNESS_V "Sharpness Vertical" 1.0 0.0 1.0 0.05
-#pragma parameter MASK_STRENGTH "Mask Strength" 0.3 0.0 1.0 0.01
-#pragma parameter MASK_DOT_WIDTH "Mask Dot Width" 1.0 1.0 100.0 1.0
-#pragma parameter MASK_DOT_HEIGHT "Mask Dot Height" 1.0 1.0 100.0 1.0
-#pragma parameter MASK_STAGGER "Mask Stagger" 0.0 0.0 100.0 1.0
-#pragma parameter MASK_SIZE "Mask Size" 1.0 1.0 100.0 1.0
-#pragma parameter SCANLINE_STRENGTH "Scanline Strength" 1.0 0.0 1.0 0.05
-#pragma parameter SCANLINE_BEAM_WIDTH_MIN "Scanline Beam Width Min." 1.5 0.5 5.0 0.5
-#pragma parameter SCANLINE_BEAM_WIDTH_MAX "Scanline Beam Width Max." 1.5 0.5 5.0 0.5
-#pragma parameter SCANLINE_BRIGHT_MIN "Scanline Brightness Min." 0.35 0.0 1.0 0.05
-#pragma parameter SCANLINE_BRIGHT_MAX "Scanline Brightness Max." 0.65 0.0 1.0 0.05
-#pragma parameter SCANLINE_CUTOFF "Scanline Cutoff" 400.0 1.0 1000.0 1.0
-#pragma parameter GAMMA_INPUT "Gamma Input" 2.0 0.1 5.0 0.1
-#pragma parameter GAMMA_OUTPUT "Gamma Output" 1.8 0.1 5.0 0.1
-#pragma parameter BRIGHT_BOOST "Brightness Boost" 1.2 1.0 2.0 0.01
-#pragma parameter DILATION "Dilation" 1.0 0.0 1.0 1.0
+#pragma parameter SHARPNESS_H Sharpness_Horizontal 0.5 0.0 1.0 0.05
+#pragma parameter SHARPNESS_V Sharpness_Vertical 1.0 0.0 1.0 0.05
+#pragma parameter MASK_STRENGTH Mask_Strength 0.3 0.0 1.0 0.01
+#pragma parameter MASK_DOT_WIDTH Mask_Dot_Width 1.0 1.0 100.0 1.0
+#pragma parameter MASK_DOT_HEIGHT Mask_Dot_Height 1.0 1.0 100.0 1.0
+#pragma parameter MASK_STAGGER Mask_Stagger 0.0 0.0 100.0 1.0
+#pragma parameter MASK_SIZE Mask_Size 1.0 1.0 100.0 1.0
+#pragma parameter SCANLINE_STRENGTH Scanline_Strength 1.0 0.0 1.0 0.05
+#pragma parameter SCANLINE_BEAM_WIDTH_MIN Scanline_Beam_Width_Min 1.5 0.5 5.0 0.5
+#pragma parameter SCANLINE_BEAM_WIDTH_MAX Scanline_Beam_Width_Max 1.5 0.5 5.0 0.5
+#pragma parameter SCANLINE_BRIGHT_MIN Scanline_Brightness_Min 0.35 0.0 1.0 0.05
+#pragma parameter SCANLINE_BRIGHT_MAX Scanline_Brightness_Max 0.65 0.0 1.0 0.05
+#pragma parameter SCANLINE_CUTOFF Scanline_Cutoff 400.0 1.0 1000.0 1.0
+#pragma parameter GAMMA_INPUT Gamma_Input 2.0 0.1 5.0 0.1
+#pragma parameter GAMMA_OUTPUT Gamma_Output 1.8 0.1 5.0 0.1
+#pragma parameter BRIGHT_BOOST Brightness_Boost 1.2 1.0 2.0 0.01
+#pragma parameter DILATION Dilation 1.0 0.0 1.0 1.0
 
 #if defined(VERTEX)
 

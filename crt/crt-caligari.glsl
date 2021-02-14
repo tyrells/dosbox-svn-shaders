@@ -24,13 +24,13 @@
 // Parameter lines go here:
 // 0.5 = the spot stays inside the original pixel
 // 1.0 = the spot bleeds up to the center of next pixel
-#pragma parameter SPOT_WIDTH "CRTCaligari Spot Width" 0.9 0.1 1.5 0.05
-#pragma parameter SPOT_HEIGHT "CRTCaligari Spot Height" 0.65 0.1 1.5 0.05
+#pragma parameter SPOT_WIDTH CRTCaligari_Spot_Width 0.9 0.1 1.5 0.05
+#pragma parameter SPOT_HEIGHT CRTCaligari_Spot_Height 0.65 0.1 1.5 0.05
 // Used to counteract the desaturation effect of weighting.
-#pragma parameter COLOR_BOOST "CRTCaligari Color Boost" 1.45 1.0 2.0 0.05
+#pragma parameter COLOR_BOOST CRTCaligari_Color_Boost 1.45 1.0 2.0 0.05
 // Constants used with gamma correction.
-#pragma parameter InputGamma "CRTCaligari Input Gamma" 2.4 0.0 5.0 0.1
-#pragma parameter OutputGamma "CRTCaligari Output Gamma" 2.2 0.0 5.0 0.1
+#pragma parameter InputGamma CRTCaligari_Input_Gamma 2.4 0.0 5.0 0.1
+#pragma parameter OutputGamma CRTCaligari_Output_Gamma 2.2 0.0 5.0 0.1
 
 #if defined(VERTEX)
 

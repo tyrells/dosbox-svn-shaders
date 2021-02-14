@@ -96,14 +96,14 @@
 ////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////
 
-#pragma parameter MASK "Mask Type" 1.0 0.0 3.0 1.0
-#pragma parameter MASK_INTENSITY "Mask Intensity" 0.5 0.0 1.0 0.05
-#pragma parameter SCANLINE_THINNESS "Scanline Intensity" 0.5 0.0 1.0 0.1
-#pragma parameter SCAN_BLUR "Sharpness" 2.5 1.0 3.0 0.1
-#pragma parameter CURVATURE "Curvature" 0.02 0.0 0.25 0.01
-#pragma parameter TRINITRON_CURVE "Trinitron-style Curve" 0.0 0.0 1.0 1.0
-#pragma parameter CORNER "Corner Round" 3.0 0.0 11.0 1.0
-#pragma parameter CRT_GAMMA "CRT Gamma" 2.4 0.0 51.0 0.1
+#pragma parameter MASK Mask_Type 1.0 0.0 3.0 1.0
+#pragma parameter MASK_INTENSITY Mask_Intensity 0.5 0.0 1.0 0.05
+#pragma parameter SCANLINE_THINNESS Scanline_Intensity 0.5 0.0 1.0 0.1
+#pragma parameter SCAN_BLUR Sharpness 2.5 1.0 3.0 0.1
+#pragma parameter CURVATURE Curvature 0.02 0.0 0.25 0.01
+#pragma parameter TRINITRON_CURVE Trinitron-style_Curve 0.0 0.0 1.0 1.0
+#pragma parameter CORNER Corner_Round 3.0 0.0 11.0 1.0
+#pragma parameter CRT_GAMMA CRT_Gamma 2.4 0.0 51.0 0.1
 
 #if defined(VERTEX)
 

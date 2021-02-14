@@ -27,12 +27,12 @@
    Incorporates some of the ideas from SABR shader. Thanks to Joshua Street.
 */
 
-#pragma parameter XBR_Y_WEIGHT "Y Weight" 48.0 0.0 100.0 1.0
-#pragma parameter XBR_EQ_THRESHOLD "Eq Threshold" 15.0 0.0 50.0 1.0
-#pragma parameter XBR_LV1_COEFFICIENT "Lv1 Coefficient" 0.5 0.0 30.0 0.5
-#pragma parameter XBR_LV2_COEFFICIENT "Lv2 Coefficient" 2.0 1.0 3.0 0.1
-#pragma parameter XBR_RES "Internal Res Multiplier" 2.0 1.0 8.0 1.0
-#pragma parameter XBR_SCALE "xBR Scale" 3.0 1.0 5.0 1.0
+#pragma parameter XBR_Y_WEIGHT Y_Weight 48.0 0.0 100.0 1.0
+#pragma parameter XBR_EQ_THRESHOLD Eq_Threshold 15.0 0.0 50.0 1.0
+#pragma parameter XBR_LV1_COEFFICIENT Lv1_Coefficient 0.5 0.0 30.0 0.5
+#pragma parameter XBR_LV2_COEFFICIENT Lv2_Coefficient 2.0 1.0 3.0 0.1
+#pragma parameter XBR_RES Internal_Res_Multiplier 2.0 1.0 8.0 1.0
+#pragma parameter XBR_SCALE xBR_Scale 3.0 1.0 5.0 1.0
 
 #define mul(a,b) (b*a)
 #define saturate(c) clamp(c, 0.0, 1.0)

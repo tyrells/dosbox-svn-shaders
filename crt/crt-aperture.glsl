@@ -5,22 +5,22 @@
 	License: GPL
 */
 
-#pragma parameter SHARPNESS_IMAGE "Sharpness Image" 1.0 1.0 5.0 1.0
-#pragma parameter SHARPNESS_EDGES "Sharpness Edges" 3.0 1.0 5.0 1.0
-#pragma parameter GLOW_WIDTH "Glow Width" 0.5 0.05 0.65 0.05
-#pragma parameter GLOW_HEIGHT "Glow Height" 0.5 0.05 0.65 0.05
-#pragma parameter GLOW_HALATION "Glow Halation" 0.1 0.0 1.0 0.01
-#pragma parameter GLOW_DIFFUSION "Glow Diffusion" 0.05 0.0 1.0 0.01
-#pragma parameter MASK_COLORS "Mask Colors" 2.0 2.0 3.0 1.0
-#pragma parameter MASK_STRENGTH "Mask Strength" 0.3 0.0 1.0 0.05
-#pragma parameter MASK_SIZE "Mask Size" 1.0 1.0 9.0 1.0
-#pragma parameter SCANLINE_SIZE_MIN "Scanline Size Min." 0.5 0.5 1.5 0.05
-#pragma parameter SCANLINE_SIZE_MAX "Scanline Size Max." 1.5 0.5 1.5 0.05
-#pragma parameter SCANLINE_SHAPE "Scanline Shape" 2.5 1.0 100.0 0.1
-#pragma parameter SCANLINE_OFFSET "Scanline Offset" 1.0 0.0 1.0 1.0
-#pragma parameter GAMMA_INPUT "Gamma Input" 2.4 1.0 5.0 0.1
-#pragma parameter GAMMA_OUTPUT "Gamma Output" 2.4 1.0 5.0 0.1
-#pragma parameter BRIGHTNESS "Brightness" 1.5 0.0 2.0 0.05
+#pragma parameter SHARPNESS_IMAGE Sharpness_Image 1.0 1.0 5.0 1.0
+#pragma parameter SHARPNESS_EDGES Sharpness_Edges 3.0 1.0 5.0 1.0
+#pragma parameter GLOW_WIDTH Glow_Width 0.5 0.05 0.65 0.05
+#pragma parameter GLOW_HEIGHT Glow_Height 0.5 0.05 0.65 0.05
+#pragma parameter GLOW_HALATION Glow_Halation 0.1 0.0 1.0 0.01
+#pragma parameter GLOW_DIFFUSION Glow_Diffusion 0.05 0.0 1.0 0.01
+#pragma parameter MASK_COLORS Mask_Colors 2.0 2.0 3.0 1.0
+#pragma parameter MASK_STRENGTH Mask_Strength 0.3 0.0 1.0 0.05
+#pragma parameter MASK_SIZE Mask_Size 1.0 1.0 9.0 1.0
+#pragma parameter SCANLINE_SIZE_MIN Scanline_Size_Min 0.5 0.5 1.5 0.05
+#pragma parameter SCANLINE_SIZE_MAX Scanline_Size_Max 1.5 0.5 1.5 0.05
+#pragma parameter SCANLINE_SHAPE Scanline_Shape 2.5 1.0 100.0 0.1
+#pragma parameter SCANLINE_OFFSET Scanline_Offset 1.0 0.0 1.0 1.0
+#pragma parameter GAMMA_INPUT Gamma_Input 2.4 1.0 5.0 0.1
+#pragma parameter GAMMA_OUTPUT Gamma_Output 2.4 1.0 5.0 0.1
+#pragma parameter BRIGHTNESS Brightness 1.5 0.0 2.0 0.05
 
 #define Coord v_texCoord
 

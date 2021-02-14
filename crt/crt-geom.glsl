@@ -21,22 +21,22 @@
 	This shader variant is pre-configured with screen curvature
 */
 
-#pragma parameter CRTgamma "CRTGeom Target Gamma" 2.4 0.1 5.0 0.1
-#pragma parameter monitorgamma "CRTGeom Monitor Gamma" 2.2 0.1 5.0 0.1
-#pragma parameter d "CRTGeom Distance" 1.6 0.1 3.0 0.1
-#pragma parameter CURVATURE "CRTGeom Curvature Toggle" 1.0 0.0 1.0 1.0
-#pragma parameter R "CRTGeom Curvature Radius" 2.0 0.1 10.0 0.1
-#pragma parameter cornersize "CRTGeom Corner Size" 0.03 0.001 1.0 0.005
-#pragma parameter cornersmooth "CRTGeom Corner Smoothness" 1000.0 80.0 2000.0 100.0
-#pragma parameter x_tilt "CRTGeom Horizontal Tilt" 0.0 -0.5 0.5 0.05
-#pragma parameter y_tilt "CRTGeom Vertical Tilt" 0.0 -0.5 0.5 0.05
-#pragma parameter overscan_x "CRTGeom Horiz. Overscan %" 100.0 -125.0 125.0 1.0
-#pragma parameter overscan_y "CRTGeom Vert. Overscan %" 100.0 -125.0 125.0 1.0
-#pragma parameter DOTMASK "CRTGeom Dot Mask Toggle" 0.3 0.0 0.3 0.3
-#pragma parameter SHARPER "CRTGeom Sharpness" 1.0 1.0 3.0 1.0
-#pragma parameter scanline_weight "CRTGeom Scanline Weight" 0.3 0.1 0.5 0.05
-#pragma parameter lum "CRTGeom Luminance" 0.0 0.0 1.0 0.01
-#pragma parameter interlace_detect "CRTGeom Interlacing Simulation" 1.0 0.0 1.0 1.0
+#pragma parameter CRTgamma CRTGeom_Target_Gamma 2.4 0.1 5.0 0.1
+#pragma parameter monitorgamma CRTGeom_Monitor_Gamma 2.2 0.1 5.0 0.1
+#pragma parameter d CRTGeom_Distance 1.6 0.1 3.0 0.1
+#pragma parameter CURVATURE CRTGeom_Curvature_Toggle 1.0 0.0 1.0 1.0
+#pragma parameter R CRTGeom_Curvature_Radius 2.0 0.1 10.0 0.1
+#pragma parameter cornersize CRTGeom_Corner_Size 0.03 0.001 1.0 0.005
+#pragma parameter cornersmooth CRTGeom_Corner_Smoothness 1000.0 80.0 2000.0 100.0
+#pragma parameter x_tilt CRTGeom_Horizontal_Tilt 0.0 -0.5 0.5 0.05
+#pragma parameter y_tilt CRTGeom_Vertical_Tilt 0.0 -0.5 0.5 0.05
+#pragma parameter overscan_x CRTGeom_Horiz_Overscan 100.0 -125.0 125.0 1.0
+#pragma parameter overscan_y CRTGeom_Vert_Overscan 100.0 -125.0 125.0 1.0
+#pragma parameter DOTMASK CRTGeom_Dot_Mask_Toggle 0.3 0.0 0.3 0.3
+#pragma parameter SHARPER CRTGeom_Sharpness 1.0 1.0 3.0 1.0
+#pragma parameter scanline_weight CRTGeom_Scanline_Weight 0.3 0.1 0.5 0.05
+#pragma parameter lum CRTGeom_Luminance 0.0 0.0 1.0 0.01
+#pragma parameter interlace_detect CRTGeom_Interlacing_Simulation 1.0 0.0 1.0 1.0
 
 #ifndef PARAMETER_UNIFORM
 #define CRTgamma 2.4

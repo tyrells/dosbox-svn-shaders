@@ -25,19 +25,19 @@
 
 */
 
-#pragma parameter PHOSPHOR "CRT - Phosphor ON/OFF" 1.0 0.0 1.0 1.0
-#pragma parameter VSCANLINES "CRT - Scanlines Direction" 0.0 0.0 1.0 1.0
-#pragma parameter InputGamma "CRT - Input gamma" 2.4 0.0 5.0 0.1
-#pragma parameter OutputGamma "CRT - Output Gamma" 2.2 0.0 5.0 0.1
-#pragma parameter SHARPNESS "CRT - Sharpness Hack" 1.0 1.0 5.0 1.0
-#pragma parameter COLOR_BOOST "CRT - Color Boost" 1.5 1.0 2.0 0.05
-#pragma parameter RED_BOOST "CRT - Red Boost" 1.0 1.0 2.0 0.01
-#pragma parameter GREEN_BOOST "CRT - Green Boost" 1.0 1.0 2.0 0.01
-#pragma parameter BLUE_BOOST "CRT - Blue Boost" 1.0 1.0 2.0 0.01
-#pragma parameter SCANLINES_STRENGTH "CRT - Scanline Strength" 0.72 0.0 1.0 0.02
-#pragma parameter BEAM_MIN_WIDTH "CRT - Min Beam Width" 0.86 0.0 1.0 0.02
-#pragma parameter BEAM_MAX_WIDTH "CRT - Max Beam Width" 1.0 0.0 1.0 0.02
-#pragma parameter CRT_ANTI_RINGING "CRT - Anti-Ringing" 0.8 0.0 1.0 0.1
+#pragma parameter PHOSPHOR CRT_-_Phosphor_ON_OFF 1.0 0.0 1.0 1.0
+#pragma parameter VSCANLINES CRT_-_Scanlines_Direction 0.0 0.0 1.0 1.0
+#pragma parameter InputGamma CRT_-_Input_Gamma 2.4 0.0 5.0 0.1
+#pragma parameter OutputGamma CRT_-_Output_Gamma 2.2 0.0 5.0 0.1
+#pragma parameter SHARPNESS CRT_-_Sharpness_Hack 1.0 1.0 5.0 1.0
+#pragma parameter COLOR_BOOST CRT_-_Color_Boost 1.5 1.0 2.0 0.05
+#pragma parameter RED_BOOST CRT_-_Red_Boost 1.0 1.0 2.0 0.01
+#pragma parameter GREEN_BOOST CRT_-_Green_Boost 1.0 1.0 2.0 0.01
+#pragma parameter BLUE_BOOST CRT_-_Blue_Boost 1.0 1.0 2.0 0.01
+#pragma parameter SCANLINES_STRENGTH CRT_-_Scanline_Strength 0.72 0.0 1.0 0.02
+#pragma parameter BEAM_MIN_WIDTH CRT_-_Min_Beam_Width 0.86 0.0 1.0 0.02
+#pragma parameter BEAM_MAX_WIDTH CRT_-_Max_Beam_Width 1.0 0.0 1.0 0.02
+#pragma parameter CRT_ANTI_RINGING CRT_-_Anti-Ringing 0.8 0.0 1.0 0.1
 
 #define GAMMA_IN(color)     pow(color, vec4(InputGamma, InputGamma, InputGamma, InputGamma))
 #define GAMMA_OUT(color)    pow(color, vec4(1.0 / OutputGamma, 1.0 / OutputGamma, 1.0 / OutputGamma, 1.0 / OutputGamma))

@@ -12,19 +12,19 @@
 // Please take and use, change, or whatever.
 
 // Parameter lines go here:
-#pragma parameter hardScan "hardScan" -8.0 -20.0 0.0 1.0
-#pragma parameter hardPix "hardPix" -3.0 -20.0 0.0 1.0
-#pragma parameter warpX "warpX" 0.031 0.0 0.125 0.01
-#pragma parameter warpY "warpY" 0.041 0.0 0.125 0.01
-#pragma parameter maskDark "maskDark" 0.5 0.0 2.0 0.1
-#pragma parameter maskLight "maskLight" 1.5 0.0 2.0 0.1
-#pragma parameter scaleInLinearGamma "scaleInLinearGamma" 1.0 0.0 1.0 1.0
-#pragma parameter shadowMask "shadowMask" 3.0 0.0 4.0 1.0
-#pragma parameter brightBoost "brightness boost" 1.0 0.0 2.0 0.05
-#pragma parameter hardBloomPix "bloom-x soft" -1.5 -2.0 -0.5 0.1
-#pragma parameter hardBloomScan "bloom-y soft" -2.0 -4.0 -1.0 0.1
-#pragma parameter bloomAmount "bloom ammount" 0.15 0.0 1.0 0.05
-#pragma parameter shape "filter kernel shape" 2.0 0.0 10.0 0.05
+#pragma parameter hardScan hardScan -8.0 -20.0 0.0 1.0
+#pragma parameter hardPix hardPix -3.0 -20.0 0.0 1.0
+#pragma parameter warpX warpX 0.031 0.0 0.125 0.01
+#pragma parameter warpY warpY 0.041 0.0 0.125 0.01
+#pragma parameter maskDark maskDark 0.5 0.0 2.0 0.1
+#pragma parameter maskLight maskLight 1.5 0.0 2.0 0.1
+#pragma parameter scaleInLinearGamma scaleInLinearGamma 1.0 0.0 1.0 1.0
+#pragma parameter shadowMask shadowMask 3.0 0.0 4.0 1.0
+#pragma parameter brightBoost brightness_boost 1.0 0.0 2.0 0.05
+#pragma parameter hardBloomPix bloom-x_soft -1.5 -2.0 -0.5 0.1
+#pragma parameter hardBloomScan bloom-y_soft -2.0 -4.0 -1.0 0.1
+#pragma parameter bloomAmount bloom_ammount 0.15 0.0 1.0 0.05
+#pragma parameter shape filter_kernel_shape 2.0 0.0 10.0 0.05
 
 #if defined(VERTEX)
 
