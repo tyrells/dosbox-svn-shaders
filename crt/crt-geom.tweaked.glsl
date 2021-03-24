@@ -21,6 +21,8 @@
 	This shader variant is pre-configured with screen curvature
 */
 
+/*
+
 #pragma parameter CRTgamma "CRTGeom Target Gamma" 2.4 0.1 5.0 0.1
 #pragma parameter monitorgamma "CRTGeom Monitor Gamma" 2.2 0.1 5.0 0.1
 #pragma parameter d "CRTGeom Distance" 1.6 0.1 3.0 0.1
@@ -37,6 +39,8 @@
 #pragma parameter scanline_weight "CRTGeom Scanline Weight" 0.3 0.1 0.5 0.05
 #pragma parameter lum "CRTGeom Luminance" 0.0 0.0 1.0 0.01
 #pragma parameter interlace_detect "CRTGeom Interlacing Simulation" 1.0 0.0 1.0 1.0
+
+*/
 
 #ifndef PARAMETER_UNIFORM
 #define CRTgamma 1.9            //tweaked

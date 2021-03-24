@@ -34,6 +34,8 @@ Notes:  This shader does scaling with a weighted linear filter for adjustable
 //overlays.  But you can uncomment the below to black them out if necessary
 //#define BLACK_OUT_BORDER
 
+/*
+
 // Parameter lines go here:
 #pragma parameter BLURSCALEX "Blur Amount X-Axis" 0.30 0.0 1.0 0.05
 #pragma parameter LOWLUMSCAN "Scanline Darkness - Low" 6.0 0.0 10.0 0.5
@@ -41,6 +43,8 @@ Notes:  This shader does scaling with a weighted linear filter for adjustable
 #pragma parameter BRIGHTBOOST "Dark Pixel Brightness Boost" 1.25 0.5 1.5 0.05
 #pragma parameter MASK_DARK "Mask Effect Amount" 0.25 0.0 1.0 0.05
 #pragma parameter MASK_FADE "Mask/Scanline Fade" 0.8 0.0 1.0 0.05
+
+*/
 
 #if defined(VERTEX)
 

@@ -26,8 +26,12 @@
    Incorporates some of the ideas from SABR shader. Thanks to Joshua Street.
 */
 
+/*
+
 #pragma parameter XBR_EQ_THRESHOLD "Eq Threshold" 0.6 0.0 2.0 0.1
 #pragma parameter XBR_LV2_COEFFICIENT "Lv2 Coefficient" 2.0 1.0 3.0 0.1
+
+*/
 
 #define mul(a,b) (b*a)
 

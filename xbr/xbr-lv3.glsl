@@ -27,12 +27,16 @@
    Incorporates some of the ideas from SABR shader. Thanks to Joshua Street.
 */
 
+/*
+
 // Parameter lines go here:
 #pragma parameter XBR_Y_WEIGHT "Y Weight" 48.0 0.0 100.0 1.0
 #pragma parameter XBR_EQ_THRESHOLD "EQ Threshold" 10.0 0.0 50.0 1.0
 #pragma parameter XBR_EQ_THRESHOLD2 "EQ Threshold 2" 2.0 0.0 4.0 1.0
 #pragma parameter XBR_LV2_COEFFICIENT "Lv2 Coefficient" 2.0 1.0 3.0 1.0
 #pragma parameter corner_type "Corner Calculation" 3.0 1.0 3.0 1.0
+
+*/
 
 #if defined(VERTEX)
 

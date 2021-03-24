@@ -1,9 +1,13 @@
 #version 120
 
+/*
+
 // Parameter lines go here:
 #pragma parameter SCANTHICK "Scanline Thickness" 2.0 2.0 4.0 2.0
 #pragma parameter INTENSITY "Scanline Intensity" 0.15 0.0 1.0 0.01
 #pragma parameter BRIGHTBOOST "Luminance Boost" 0.15 0.0 1.0 0.01
+
+*/
 
 #if defined(VERTEX)
 

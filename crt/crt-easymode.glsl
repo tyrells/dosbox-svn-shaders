@@ -29,6 +29,8 @@
 	- Stagger:    3
 */
 
+/*
+
 // Parameter lines go here:
 #pragma parameter SHARPNESS_H "Sharpness Horizontal" 0.5 0.0 1.0 0.05
 #pragma parameter SHARPNESS_V "Sharpness Vertical" 1.0 0.0 1.0 0.05
@@ -47,6 +49,8 @@
 #pragma parameter GAMMA_OUTPUT "Gamma Output" 1.8 0.1 5.0 0.1
 #pragma parameter BRIGHT_BOOST "Brightness Boost" 1.2 1.0 2.0 0.01
 #pragma parameter DILATION "Dilation" 1.0 0.0 1.0 1.0
+
+*/
 
 #if defined(VERTEX)
 

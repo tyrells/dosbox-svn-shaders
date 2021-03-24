@@ -25,6 +25,8 @@
 
 */
 
+/*
+
 #pragma parameter PHOSPHOR "CRT - Phosphor ON/OFF" 1.0 0.0 1.0 1.0
 #pragma parameter VSCANLINES "CRT - Scanlines Direction" 0.0 0.0 1.0 1.0
 #pragma parameter InputGamma "CRT - Input gamma" 2.4 0.0 5.0 0.1
@@ -38,6 +40,8 @@
 #pragma parameter BEAM_MIN_WIDTH "CRT - Min Beam Width" 0.86 0.0 1.0 0.02
 #pragma parameter BEAM_MAX_WIDTH "CRT - Max Beam Width" 1.0 0.0 1.0 0.02
 #pragma parameter CRT_ANTI_RINGING "CRT - Anti-Ringing" 0.8 0.0 1.0 0.1
+
+*/
 
 #define GAMMA_IN(color)     pow(color, vec4(InputGamma, InputGamma, InputGamma, InputGamma))
 #define GAMMA_OUT(color)    pow(color, vec4(1.0 / OutputGamma, 1.0 / OutputGamma, 1.0 / OutputGamma, 1.0 / OutputGamma))

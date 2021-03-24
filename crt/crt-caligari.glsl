@@ -21,6 +21,8 @@
 
 */
 
+/*
+
 // Parameter lines go here:
 // 0.5 = the spot stays inside the original pixel
 // 1.0 = the spot bleeds up to the center of next pixel
@@ -31,6 +33,8 @@
 // Constants used with gamma correction.
 #pragma parameter InputGamma "CRTCaligari Input Gamma" 2.4 0.0 5.0 0.1
 #pragma parameter OutputGamma "CRTCaligari Output Gamma" 2.2 0.0 5.0 0.1
+
+*/
 
 #if defined(VERTEX)
 

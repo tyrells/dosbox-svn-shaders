@@ -5,6 +5,8 @@
 	License: GPL
 */
 
+/*
+
 #pragma parameter SHARPNESS_IMAGE "Sharpness Image" 1.0 1.0 5.0 1.0
 #pragma parameter SHARPNESS_EDGES "Sharpness Edges" 3.0 1.0 5.0 1.0
 #pragma parameter GLOW_WIDTH "Glow Width" 0.5 0.05 0.65 0.05
@@ -21,6 +23,8 @@
 #pragma parameter GAMMA_INPUT "Gamma Input" 2.4 1.0 5.0 0.1
 #pragma parameter GAMMA_OUTPUT "Gamma Output" 2.4 1.0 5.0 0.1
 #pragma parameter BRIGHTNESS "Brightness" 1.5 0.0 2.0 0.05
+
+*/
 
 #define Coord v_texCoord
 

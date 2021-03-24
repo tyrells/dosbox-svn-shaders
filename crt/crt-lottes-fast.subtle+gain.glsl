@@ -96,6 +96,8 @@
 ////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////
 
+/*
+
 #pragma parameter MASK "Mask Type" 1.0 0.0 3.0 1.0
 #pragma parameter MASK_INTENSITY "Mask Intensity" 0.5 0.0 1.0 0.05
 #pragma parameter SCANLINE_THINNESS "Scanline Intensity" 0.5 0.0 1.0 0.1
@@ -104,6 +106,8 @@
 #pragma parameter TRINITRON_CURVE "Trinitron-style Curve" 0.0 0.0 1.0 1.0
 #pragma parameter CORNER "Corner Round" 3.0 0.0 11.0 1.0
 #pragma parameter CRT_GAMMA "CRT Gamma" 2.4 0.0 51.0 0.1
+
+*/
 
 #if defined(VERTEX)
 
@@ -723,7 +727,7 @@ void main()
 	CrtsTone(1.0,0.0,INPUT_THIN,INPUT_MASK));
 
 	// Shadertoy outputs non-linear color
-	
+
   #ifdef SHOW_DRY
 	if (vTexCoord.x > SHOW_DRY)
 	 if (SHOW_DRY_MODE == 0)

@@ -26,12 +26,16 @@
    Incorporates some of the ideas from SABR shader. Thanks to Joshua Street.
 */
 
+/*
+
 //#pragma parameter XBR_SCALE "xBR Scale" 3.0 1.0 5.0 1.0
 #pragma parameter XBR_Y_WEIGHT "Y Weight" 48.0 0.0 100.0 1.0
 #pragma parameter XBR_EQ_THRESHOLD "Eq Threshold" 15.0 0.0 50.0 1.0
 #pragma parameter XBR_LV1_COEFFICIENT "Lv1 Coefficient" 0.5 0.0 30.0 0.5
 #pragma parameter XBR_LV2_COEFFICIENT "Lv2 Coefficient" 2.0 1.0 3.0 0.1
 #pragma parameter small_details "Preserve Small Details" 0.0 0.0 1.0 1.0
+
+*/
 
 #define mul(a,b) (b*a)
 
