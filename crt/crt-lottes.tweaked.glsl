@@ -1,5 +1,8 @@
 #version 120
 
+#pragma use_srgb_texture
+#pragma use_srgb_framebuffer
+
 // PUBLIC DOMAIN CRT STYLED SCAN-LINE SHADER
 //
 //   by Timothy Lottes
@@ -22,7 +25,6 @@
 #pragma parameter warpY "warpY" 0.041 0.0 0.125 0.01
 #pragma parameter maskDark "maskDark" 0.5 0.0 2.0 0.1
 #pragma parameter maskLight "maskLight" 1.5 0.0 2.0 0.1
-#pragma parameter scaleInLinearGamma "scaleInLinearGamma" 1.0 0.0 1.0 1.0
 #pragma parameter shadowMask "shadowMask" 3.0 0.0 4.0 1.0
 #pragma parameter brightBoost "brightness boost" 1.0 0.0 2.0 0.05
 #pragma parameter hardBloomPix "bloom-x soft" -1.5 -2.0 -0.5 0.1
@@ -113,7 +115,6 @@ uniform COMPAT_PRECISION float warpX;
 uniform COMPAT_PRECISION float warpY;
 uniform COMPAT_PRECISION float maskDark;
 uniform COMPAT_PRECISION float maskLight;
-uniform COMPAT_PRECISION float scaleInLinearGamma;
 uniform COMPAT_PRECISION float shadowMask;
 uniform COMPAT_PRECISION float brightBoost;
 uniform COMPAT_PRECISION float hardBloomPix;
@@ -127,7 +128,6 @@ uniform COMPAT_PRECISION float shape;
 #define warpY 0.0075    //tweaked
 #define maskDark 0.5
 #define maskLight 1.5
-#define scaleInLinearGamma 1.0
 #define shadowMask 1.0
 #define brightBoost 1.4 //tweaked
 #define hardBloomPix -1.5
@@ -136,73 +136,13 @@ uniform COMPAT_PRECISION float shape;
 #define shape 2.0
 #endif
 
-//Uncomment to reduce instructions with simpler linearization
-//(fixes HD3000 Sandy Bridge IGP)
-//#define SIMPLE_LINEAR_GAMMA
 #define DO_BLOOM
-
-// ------------- //
-
-// sRGB to Linear.
-// Assuming using sRGB typed textures this should not be needed.
-#ifdef SIMPLE_LINEAR_GAMMA
-float ToLinear1(float c)
-{
-	return c;
-}
-vec3 ToLinear(vec3 c)
-{
-	return c;
-}
-vec3 ToSrgb(vec3 c)
-{
-	return pow(c, vec3(1.0 / 2.2));
-}
-#else
-float ToLinear1(float c)
-{
-	if (scaleInLinearGamma == 0.)
-		return c;
-
-	return(c<=0.04045) ? c/12.92 : pow((c + 0.055)/1.055, 2.4);
-}
-
-vec3 ToLinear(vec3 c)
-{
-	if (scaleInLinearGamma==0.)
-		return c;
-
-	return vec3(ToLinear1(c.r), ToLinear1(c.g), ToLinear1(c.b));
-}
-
-// Linear to sRGB.
-// Assuming using sRGB typed textures this should not be needed.
-float ToSrgb1(float c)
-{
-	if (scaleInLinearGamma == 0.)
-		return c;
-
-	return(c<0.0031308 ? c*12.92 : 1.055*pow(c, 0.41666) - 0.055);
-}
-
-vec3 ToSrgb(vec3 c)
-{
-	if (scaleInLinearGamma == 0.)
-		return c;
-
-	return vec3(ToSrgb1(c.r), ToSrgb1(c.g), ToSrgb1(c.b));
-}
-#endif
 
 // Nearest emulated sample given floating point position and texel offset.
 // Also zero's off screen.
 vec3 Fetch(vec2 pos,vec2 off){
   pos=(floor(pos*SourceSize.xy+off)+vec2(0.5,0.5))/SourceSize.xy;
-#ifdef SIMPLE_LINEAR_GAMMA
-  return ToLinear(brightBoost * pow(COMPAT_TEXTURE(Source,pos.xy).rgb, vec3(2.2)));
-#else
-  return ToLinear(brightBoost * COMPAT_TEXTURE(Source,pos.xy).rgb);
-#endif
+  return brightBoost * COMPAT_TEXTURE(Source,pos.xy).rgb;
 }
 
 // Distance in emulated pixels to nearest texel.
@@ -419,6 +359,6 @@ void main()
 	else
 		outColor.rgb = vec3(0.0);
 #endif
-	FragColor = vec4(ToSrgb(outColor.rgb), 1.0);
+	FragColor = vec4(outColor.rgb, 1.0);
 }
 #endif

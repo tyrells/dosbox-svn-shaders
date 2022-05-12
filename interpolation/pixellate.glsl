@@ -1,5 +1,8 @@
 #version 120
 
+#pragma use_srgb_texture
+#pragma use_srgb_framebuffer
+
 //    Pixellate Shader
 //    Copyright (c) 2011, 2012 Fes
 //    Permission to use, copy, modify, and/or distribute this software for any
@@ -15,8 +18,6 @@
 //    (Fes gave their permission to have this shader distributed under this
 //    licence in this forum post:
 //        http://board.byuu.org/viewtopic.php?p=57295#p57295
-
-#define INTERPOLATE_IN_LINEAR_GAMMA 1.0
 
 uniform vec2 rubyTextureSize;
 uniform vec2 rubyInputSize;
@@ -106,13 +107,6 @@ void main()
 	vec3 bottomLeftColor  = COMPAT_TEXTURE(Source, (floor(vec2(left, bottom)  / texelSize) + 0.5) * texelSize).rgb;
 	vec3 topRightColor    = COMPAT_TEXTURE(Source, (floor(vec2(right, top)    / texelSize) + 0.5) * texelSize).rgb;
 
-	if (INTERPOLATE_IN_LINEAR_GAMMA > 0.5){
-	topLeftColor     = pow(topLeftColor, vec3(2.2));
-	bottomRightColor = pow(bottomRightColor, vec3(2.2));
-	bottomLeftColor  = pow(bottomLeftColor, vec3(2.2));
-	topRightColor    = pow(topRightColor, vec3(2.2));
-	}
-
 	vec2 border = clamp(floor((vTexCoord / texelSize) + vec2(0.5)) * texelSize, vec2(left, bottom), vec2(right, top));
 
 	float totalArea = 4.0 * range.x * range.y;
@@ -123,6 +117,6 @@ void main()
 	averageColor += ((border.x - left)  * (border.y - bottom) / totalArea) * bottomLeftColor;
 	averageColor += ((right - border.x) * (top - border.y)    / totalArea) * topRightColor;
 
-	FragColor = (INTERPOLATE_IN_LINEAR_GAMMA > 0.5) ? vec4(pow(averageColor, vec3(1.0 / 2.2)), 1.0) : vec4(averageColor, 1.0);
+	FragColor = vec4(averageColor, 1.0);
 }
 #endif
