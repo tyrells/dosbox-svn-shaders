@@ -102,7 +102,7 @@ uniform COMPAT_PRECISION vec2 rubyOutputSize;
 uniform COMPAT_PRECISION vec2 rubyTextureSize;
 uniform COMPAT_PRECISION vec2 rubyInputSize;
 uniform sampler2D Texture;
-COMPAT_VARYING vec4 v_texCoord;
+COMPAT_VARYING vec2 v_texCoord;
 
 #ifdef PARAMETER_UNIFORM
 uniform COMPAT_PRECISION float CRT_MULRES_X;
