@@ -26,54 +26,48 @@
 
 */
 
-#define Coord v_texCoord
-
 #if defined(VERTEX)
 
 #if __VERSION__ >= 130
-#define OUT out
-#define IN  in
-#define tex2D texture
+#define COMPAT_VARYING out
+#define COMPAT_ATTRIBUTE in
+#define COMPAT_TEXTURE texture
 #else
-#define OUT varying
-#define IN attribute
-#define tex2D texture2D
+#define COMPAT_VARYING varying
+#define COMPAT_ATTRIBUTE attribute
+#define COMPAT_TEXTURE texture2D
 #endif
 
 #ifdef GL_ES
-#define PRECISION mediump
+#define COMPAT_PRECISION mediump
 #else
-#define PRECISION
+#define COMPAT_PRECISION
 #endif
 
-IN  vec4 a_position;
-IN  vec4 Color;
-IN  vec2 TexCoord;
-OUT vec4 color;
-OUT vec2 Coord;
+uniform vec2 rubyTextureSize;
+uniform vec2 rubyInputSize;
+uniform vec2 rubyOutputSize;
 
-uniform PRECISION vec2 rubyTextureSize;
-uniform PRECISION vec2 rubyInputSize;
+COMPAT_ATTRIBUTE vec4 a_position;
+COMPAT_VARYING vec2 v_texCoord;
 
 void main()
 {
 	gl_Position = a_position;
 	v_texCoord = vec2(a_position.x + 1.0, 1.0 - a_position.y) / 2.0 * rubyInputSize / rubyTextureSize;
-
-	color = Color;
-	Coord = v_texCoord * 1.0001;
+	v_texCoord = v_texCoord * 1.0001;
 }
 
 #elif defined(FRAGMENT)
 
 #if __VERSION__ >= 130
-#define IN in
-#define tex2D texture
+#define COMPAT_VARYING in
+#define COMPAT_TEXTURE texture
 out vec4 FragColor;
 #else
-#define IN varying
+#define COMPAT_VARYING varying
 #define FragColor gl_FragColor
-#define tex2D texture2D
+#define COMPAT_TEXTURE texture2D
 #endif
 
 #ifdef GL_ES
@@ -82,34 +76,33 @@ precision highp float;
 #else
 precision mediump float;
 #endif
-#define PRECISION mediump
+#define COMPAT_PRECISION highp
 #else
-#define PRECISION
+#define COMPAT_PRECISION
 #endif
 
-uniform PRECISION vec2 rubyOutputSize;
-uniform PRECISION vec2 rubyTextureSize;
-uniform PRECISION vec2 rubyInputSize;
+uniform vec2 rubyTextureSize;
+uniform vec2 rubyInputSize;
+uniform vec2 rubyOutputSize;
 uniform sampler2D rubyTexture;
-IN vec2 Coord;
 
 #ifdef PARAMETER_UNIFORM
-uniform PRECISION float SHARPNESS_IMAGE;
-uniform PRECISION float SHARPNESS_EDGES;
-uniform PRECISION float GLOW_WIDTH;
-uniform PRECISION float GLOW_HEIGHT;
-uniform PRECISION float GLOW_HALATION;
-uniform PRECISION float GLOW_DIFFUSION;
-uniform PRECISION float MASK_COLORS;
-uniform PRECISION float MASK_STRENGTH;
-uniform PRECISION float MASK_SIZE;
-uniform PRECISION float SCANLINE_SIZE_MIN;
-uniform PRECISION float SCANLINE_SIZE_MAX;
-uniform PRECISION float SCANLINE_SHAPE;
-uniform PRECISION float SCANLINE_OFFSET;
-uniform PRECISION float GAMMA_INPUT;
-uniform PRECISION float GAMMA_OUTPUT;
-uniform PRECISION float BRIGHTNESS;
+uniform COMPAT_PRECISION float SHARPNESS_IMAGE;
+uniform COMPAT_PRECISION float SHARPNESS_EDGES;
+uniform COMPAT_PRECISION float GLOW_WIDTH;
+uniform COMPAT_PRECISION float GLOW_HEIGHT;
+uniform COMPAT_PRECISION float GLOW_HALATION;
+uniform COMPAT_PRECISION float GLOW_DIFFUSION;
+uniform COMPAT_PRECISION float MASK_COLORS;
+uniform COMPAT_PRECISION float MASK_STRENGTH;
+uniform COMPAT_PRECISION float MASK_SIZE;
+uniform COMPAT_PRECISION float SCANLINE_SIZE_MIN;
+uniform COMPAT_PRECISION float SCANLINE_SIZE_MAX;
+uniform COMPAT_PRECISION float SCANLINE_SHAPE;
+uniform COMPAT_PRECISION float SCANLINE_OFFSET;
+uniform COMPAT_PRECISION float GAMMA_INPUT;
+uniform COMPAT_PRECISION float GAMMA_OUTPUT;
+uniform COMPAT_PRECISION float BRIGHTNESS;
 #else
 #define SHARPNESS_IMAGE 1.0
 #define SHARPNESS_EDGES 3.0
@@ -154,7 +147,7 @@ uniform PRECISION float BRIGHTNESS;
 */
 
 #if defined(OPENGLNB)
-#define NN_TEXTURE tex2D
+#define NN_TEXTURE COMPAT_TEXTURE
 #define BL_TEXTURE blTexture
 vec4 blTexture(in sampler2D sampler, in vec2 uv)
 {
@@ -166,10 +159,10 @@ vec4 blTexture(in sampler2D sampler, in vec2 uv)
 	vec2 s1t1 = s0t0 + vec2(1.0);
 
 	vec2 invTexSize = 1.0 / rubyTextureSize;
-	vec4 c_s0t0 = tex2D(sampler, s0t0 * invTexSize);
-	vec4 c_s0t1 = tex2D(sampler, s0t1 * invTexSize);
-	vec4 c_s1t0 = tex2D(sampler, s1t0 * invTexSize);
-	vec4 c_s1t1 = tex2D(sampler, s1t1 * invTexSize);
+	vec4 c_s0t0 = COMPAT_TEXTURE(sampler, s0t0 * invTexSize);
+	vec4 c_s0t1 = COMPAT_TEXTURE(sampler, s0t1 * invTexSize);
+	vec4 c_s1t0 = COMPAT_TEXTURE(sampler, s1t0 * invTexSize);
+	vec4 c_s1t1 = COMPAT_TEXTURE(sampler, s1t1 * invTexSize);
 
 	vec2 weight = fract(texCoord);
 
@@ -179,13 +172,13 @@ vec4 blTexture(in sampler2D sampler, in vec2 uv)
 	return (c0 + (c1 - c0) * weight.y);
 }
 #else
-#define BL_TEXTURE tex2D
+#define BL_TEXTURE COMPAT_TEXTURE
 #define NN_TEXTURE nnTexture
 vec4 nnTexture(in sampler2D sampler, in vec2 uv)
 {
 	vec2 texCoord = floor(uv * rubyTextureSize) + vec2(0.5);
 	vec2 invTexSize = 1.0 / rubyTextureSize;
-	return tex2D(sampler, texCoord * invTexSize);
+	return COMPAT_TEXTURE(sampler, texCoord * invTexSize);
 }
 #endif
 
@@ -263,6 +256,8 @@ vec3 get_mask_weight(float x)
 	else return vec3(0.0, 0.0, 1.0);
 }
 
+COMPAT_VARYING vec2 v_texCoord;
+
 void main()
 {
 	float scale = floor((rubyOutputSize.y / rubyInputSize.y) + 0.001);
@@ -270,7 +265,7 @@ void main()
 
 	if (bool(mod(scale, 2.0))) offset = 0.0;
 
-	vec2 co = (Coord * rubyTextureSize - vec2(0.0, offset * SCANLINE_OFFSET)) / rubyTextureSize;
+	vec2 co = (v_texCoord * rubyTextureSize - vec2(0.0, offset * SCANLINE_OFFSET)) / rubyTextureSize;
 
 	vec3 col_glow = filter_gaussian(rubyTexture, co, rubyTextureSize);
 	vec3 col_soft = filter_lanczos(rubyTexture, co, rubyTextureSize, SHARPNESS_IMAGE);
