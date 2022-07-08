@@ -1,3 +1,5 @@
+#version 120
+
 // CRT Emulation
 // by Mattias
 // https://www.shadertoy.com/view/lsB3DV
@@ -35,15 +37,10 @@ uniform COMPAT_PRECISION vec2 rubyOutputSize;
 uniform COMPAT_PRECISION vec2 rubyTextureSize;
 uniform COMPAT_PRECISION vec2 rubyInputSize;
 
-// compatibility #defines
-#define vTexCoord v_texCoord.xy
-#define SourceSize vec4(rubyTextureSize, 1.0 / rubyTextureSize) //either TextureSize or InputSize
-#define OutSize vec4(rubyOutputSize, 1.0 / rubyOutputSize)
-
 void main()
 {
     gl_Position = a_position;
-    v_texCoord = vec2(a_position.x+1.0,1.0-a_position.y)/2.0*rubyInputSize/rubyTextureSize;
+	v_texCoord = vec2(a_position.x + 1.0, 1.0 - a_position.y) / 2.0 * rubyInputSize / rubyTextureSize;
 }
 
 #elif defined(FRAGMENT)
@@ -74,14 +71,7 @@ uniform COMPAT_PRECISION vec2 rubyOutputSize;
 uniform COMPAT_PRECISION vec2 rubyTextureSize;
 uniform COMPAT_PRECISION vec2 rubyInputSize;
 uniform sampler2D Texture;
-COMPAT_VARYING vec4 v_texCoord;
-
-// compatibility #defines
-#define Source Texture
-#define vTexCoord v_texCoord.xy
-
-#define SourceSize vec4(rubyTextureSize, 1.0 / rubyTextureSize) //either TextureSize or InputSize
-#define OutSize vec4(rubyOutputSize, 1.0 / rubyOutputSize)
+COMPAT_VARYING vec2 v_texCoord;
 
 #ifdef PARAMETER_UNIFORM
 uniform COMPAT_PRECISION float CURVATURE, SCANSPEED;
@@ -169,7 +159,7 @@ vec2 curve(vec2 uv)
 
 void main()
 {
-    vec2 q = (vTexCoord.xy * rubyTextureSize.xy / rubyInputSize.xy);//fragCoord.xy / iResolution.xy;
+    vec2 q = (v_texCoord.xy * rubyTextureSize.xy / rubyInputSize.xy);//fragCoord.xy / iResolution.xy;
     vec2 uv = q;
     uv = mix( uv, curve( uv ), CURVATURE ) * rubyInputSize.xy / rubyTextureSize.xy;
     vec3 col;
