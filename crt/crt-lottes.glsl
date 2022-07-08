@@ -51,10 +51,7 @@
 #endif
 
 COMPAT_ATTRIBUTE vec4 VertexCoord;
-COMPAT_ATTRIBUTE vec4 COLOR;
 COMPAT_ATTRIBUTE vec4 TexCoord;
-COMPAT_VARYING vec4 COL0;
-COMPAT_VARYING vec4 TEX0;
 
 uniform COMPAT_PRECISION vec2 rubyTextureSize;
 uniform COMPAT_PRECISION vec2 rubyInputSize;
